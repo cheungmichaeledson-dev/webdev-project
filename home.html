@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IntraSpots: Explore top hangout spots, hidden gems, and plan your perfect Intramuros adventure.">
+  <title>IntraSpots | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+ <div id="header-placeholder"></div>
+ <div id="sidebar-placeholder"></div>
+
+    <!-- Hero Section -->
+  <section class="hero" style="background-image:url('intramuros-hero.jpg');">
+    <div class="hero-overlay">
+      <h1>Welcome to IntraSpots</h1>
+      <p>Your gateway to the best cafés, corners, and hidden treasures of Intramuros.</p>
+      <a href="#featured" class="btn btn-primary">Discover Now</a>
+    </div>
+  </section>
+
+  <!-- Featured Spots Grid -->
+  <main class="content">
+    <section id="featured" class="spot-section grid-three">
+      <h2>Featured Spots</h2>
+<div class="spot-card" data-id="papa-kape">
+  <span class="badge">Local Favorite</span>
+  <a href="papa-kape-fort-santiago.html">
+    <img src="papa-kape-hero.jpg" alt="Rustic interior of Papa Kape café">
+    <h3>Papa Kape</h3>
+  </a>
+  <p>Rustic café set inside a 400-year-old cistern, serving bold kapeng barako and Filipino merienda.</p>
+  <div class="vote-controls">
+    <button class="vote-btn upvote" aria-label="Upvote">▲</button>
+    <span class="vote-count">0</span>
+    <button class="vote-btn downvote" aria-label="Downvote">▼</button>
+  </div>
+</div>
+
+<div class="spot-card" data-id="destileria">
+  <span class="badge">Hidden Gem</span>
+  <a href="destileria-limtuaco-museum.html">
+    <img src="destileria-limtuaco0-museum-1.jpg" alt="Antique bottles at Destileria Limtuaco Museum">
+    <h3>Destileria Limtuaco</h3>
+  </a>
+  <p>Step into the Philippines’ oldest distillery museum—see vintage equipment and sample artisanal spirits.</p>
+  <div class="vote-controls">
+    <button class="vote-btn upvote" aria-label="Upvote">▲</button>
+    <span class="vote-count">0</span>
+    <button class="vote-btn downvote" aria-label="Downvote">▼</button>
+  </div>
+</div>
+
+<div class="spot-card" data-id="casa-manila">
+  <span class="badge">Heritage</span>
+  <a href="casa-manila.html">
+    <img src="casa-manila.jpg" alt="Victorian furnishings inside Casa Manila">
+    <h3>Casa Manila</h3>
+  </a>
+  <p>Discover life in 19th-century Manila through exquisitely restored period rooms and decor.</p>
+  <div class="vote-controls">
+    <button class="vote-btn upvote" aria-label="Upvote">▲</button>
+    <span class="vote-count">0</span>
+    <button class="vote-btn downvote" aria-label="Downvote">▼</button>
+  </div>
+</div>
+
+    </section>
+  
+
+    <!-- Call to Action -->
+    <section class="spot-section cta-section">
+      <h2>Join the Community</h2>
+      <p>Share your favorite Intramuros spot or leave a review to help fellow explorers.</p>
+      <a href="contact.html" class="btn btn-secondary">Submit a Review</a>
+    </section>
+
+    <!-- Latest Updates -->
+    <section class="spot-section updates-section">
+      <h2>Latest Updates</h2>
+      <ul>
+        <li><strong>May 20, 2025:</strong> Added star rating review feature.</li>
+        <li><strong>May 15, 2025:</strong> Interactive map feature launched.</li>
+        <li><strong>May 10, 2025:</strong> Added user photo gallery for top spots.</li>
+      </ul>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 IntraSpots. All rights reserved.</p>
+  </footer>
+  <script src="barScript.js"></script>
+  <script src="script.js"></script>
+  <script src="votes.js"></script>
+</body>
+</html>

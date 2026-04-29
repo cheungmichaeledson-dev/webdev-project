@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="La Cathedral Café: an art deco-inspired café inside Manila Cathedral grounds offering specialty brews and cozy ambiance.">
+  <title>IntraSpots | La Cathedral Café</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <div id="sidebar-placeholder"></div>
+
+
+
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('la-cathedral-hero.jpg');">
+    <div class="hero-content">
+      <h1>La Cathedral Café</h1>
+      <p>Enjoy artisanal coffee and pastries in an elegant art deco setting near the Manila Cathedral.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Overview -->
+    <section class="spot-section">
+      <h2>Overview</h2>
+      <p>
+        <strong>La Cathedral Café</strong> is a charming art deco–inspired café located within the grounds of the historic Manila Cathedral.  
+        Its stylish interiors blend vintage design with modern comforts, making it a favorite spot for coffee lovers and history buffs alike.
+      </p>
+      <p>
+        Renowned for its single-origin brews, handcrafted pastries, and relaxing atmosphere, the café offers a quiet retreat amid the bustling streets of Intramuros.
+      </p>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="spot-section gallery-section">
+      <h2>Photo Gallery</h2>
+      <div class="grid-three">
+        <img src="la-cathedral-1.jpg" alt="Art deco interior of La Cathedral Café">
+        <img src="la-cathedral-2.jpg" alt="Barista crafting latte art">
+        <img src="la-cathedral-3.jpg" alt="Pastries display at La Cathedral Café">
+        <img src="la-cathedral-4.jpg" alt="Cozy corner seating inside café">
+        <img src="la-cathedral-5.jpg" alt="5">
+        <img src="la-cathedral-6.jpg" alt="6">
+      </div>
+      <div class="lightbox-overlay"></div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="spot-section">
+      <h2>🥐 Key Features</h2>
+      <ul>
+        <li><strong>Art Deco Ambiance:</strong> Elegant 1930s–era design with stained glass, geometric patterns, and vintage furnishings.</li>
+        <li><strong>Specialty Coffee:</strong> Single-origin beans roasted in-house, pour-over, and espresso-based drinks.</li>
+        <li><strong>Handcrafted Pastries:</strong> Freshly baked croissants, tarts, and local dessert twists.</li>
+        <li><strong>Indoor & Outdoor Seating:</strong> Garden courtyard tables shaded by trees and air-conditioned interior.</li>
+        <li><strong>Open Daily:</strong> 7 AM to 8 PM, perfect for breakfast meetings or afternoon breaks.</li>
+        <li><strong>Wi-Fi & Power Outlets:</strong> Reliable connectivity for students and remote workers.</li>
+      </ul>
+    </section>
+
+    <!-- Find It Here -->
+    <section class="spot-section">
+      <h2>Find It Here</h2>
+      <div class="map-container">
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1364559848494!2d120.97160227487252!3d14.591299285893884!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397cb4388d9a055%3A0x142863562afc151c!2sLa%20Cathedral%20Cafe!5e0!3m2!1sen!2sph!4v1748018974395!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <!-- User Reviews -->
+    <section class="spot-section reviews-section">
+      <h2>User Reviews</h2>
+
+      <p id="averageRating" class="average-stars">Loading average rating...</p>
+      <div id="reviewsList"></div>
+
+      <form id="reviewForm" class="review-form">
+        <input type="hidden" name="place" value="La Cathedral Cafe">
+        <input type="text" name="name" placeholder="Your name" required>
+        <select name="rating" required>
+          <option value="">Rating</option>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+        <textarea name="review" rows="3" placeholder="Your review..." required></textarea>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 IntraSpots. All rights reserved.</p>
+  </footer>
+
+  <script src="barScript.js"></script>
+  <script src="script.js"></script>
+  <script src="picture.js"></script>
+  <script src="reviews.js"></script>
+</body>
+</html>

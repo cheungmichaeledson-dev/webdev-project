@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Explore Bahay Tsinoy: a cultural museum in Intramuros dedicated to Chinese-Filipino heritage, history, and contributions."/>
+  <title>IntraSpots | Bahay Tsinoy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  <div id="sidebar-placeholder"></div>
+
+
+  <!-- Hero Section -->
+  <section class="hero" style="background-image:url('bahay-tsinoy-hero.PNG');">
+    <div class="hero-content">
+      <h1>Bahay Tsinoy</h1>
+      <p>Explore the Chinese-Filipino legacy through artifacts, dioramas, and stories of integration and identity.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Overview -->
+    <section class="spot-section">
+      <h2>Overview</h2>
+      <p>
+        <strong>Bahay Tsinoy</strong>, formally the Kaisa Heritage Center, is a cultural museum in Intramuros that chronicles the rich and intertwined histories of Chinese and Filipino communities.
+        Located near the historic walls of the Walled City, this museum is a visual narrative of centuries of cultural exchange, migration, and contributions of the Chinese-Filipino or “Tsinoy” people.
+      </p>
+      <p>
+        The museum features life-sized dioramas, rare photographs, antique ceramics, trade documents, and displays highlighting how Chinese immigrants adapted and shaped Philippine society across generations.
+      </p>
+    </section>
+
+    <!-- Photo Gallery -->
+    <section class="spot-section gallery-section">
+      <h2>Photo Gallery</h2>
+      <div class="grid-three">
+        <img src="bahay-tsinoy-1.PNG" alt="Museum entrance of Bahay Tsinoy" />
+        <img src="bahay-tsinoy-2.PNG" alt="Diorama showcasing Chinese settlers" />
+        <img src="bahay-tsinoy-3.PNG" alt="Old Chinese porcelain trade wares" />
+        <img src="bahay-tsinoy-4.PNG" alt="Wall displays with historical documents" />
+        <img src="bahay-tsinoy-5.PNG" alt="Educational panels about Chinese influence" />
+        <img src="bahay-tsinoy-6.PNG" alt="6" />
+        <img src="bahay-tsinoy-7.PNG" alt="7" />
+        <img src="bahay-tsinoy-8.PNG" alt="8" />
+      </div>
+      <div class="lightbox-overlay"></div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="spot-section">
+      <h2>🏮 Museum Highlights</h2>
+      <ul>
+        <li><strong>Life-sized Dioramas:</strong> Realistic exhibits portray the arrival of Chinese immigrants and daily life in colonial Manila.</li>
+        <li><strong>Historical Artifacts:</strong> Rare porcelain, coins, and trade relics document centuries of Chinese trade and settlement.</li>
+        <li><strong>Tsinoy Identity:</strong> Explore how integration shaped Filipino culture, language, and society through interactive displays.</li>
+        <li><strong>Community Contributions:</strong> Learn about Chinese-Filipino figures who influenced education, business, and politics.</li>
+        <li><strong>Educational Hub:</strong> Regular lectures, exhibits, and publications make it a center for heritage and historical research.</li>
+        <li><strong>Accessible Location:</strong> Centrally located within walking distance from other Intramuros attractions.</li>
+      </ul>
+    </section>
+
+    <!-- Map Section -->
+    <section class="spot-section">
+      <h2>Find It Here</h2>
+      <div class="map-container">
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1433975526043!2d120.97245087487251!3d14.590903585894319!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca17e1fda82f%3A0x707ef507a48b0cc0!2sBahay%20Tsinoy%2C%20Museum%20of%20Chinese%20in%20Philippine%20Life!5e0!3m2!1sen!2sph!4v1748019996135!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <!-- User Reviews -->
+    <section class="spot-section reviews-section">
+      <h2>User Reviews</h2>
+      <p id="averageRating" class="average-stars">Loading average rating...</p>
+      <div id="reviewsList"></div>
+
+      <form id="reviewForm" class="review-form">
+        <input type="hidden" name="place" value="Bahay Tsinoy" />
+        <input type="text" name="name" placeholder="Your name" required />
+        <select name="rating" required>
+          <option value="">Rating</option>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
+        <textarea name="review" rows="3" placeholder="Your review..." required></textarea>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 IntraSpots. All rights reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="barScript.js"></script>
+  <script src="script.js"></script>
+  <script src="picture.js"></script>
+  <script src="reviews.js"></script>
+</body>
+</html>
