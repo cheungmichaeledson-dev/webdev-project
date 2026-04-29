@@ -33,16 +33,16 @@
 <section class="spot-section gallery-section">
   <h2>Photo Gallery</h2>
   <div class="grid-three">
-    <img src="papa-kape-1.jpg"  alt="Barako coffee at Papa Kape">
-    <img src="papa-kape-2.jpg"  alt="Rustic interiors of Papa Kape">
-    <img src="papa-kape-3.jpg"  alt="Filipino pastries served in cafe">
-    <img src="papa-kape-4.jpg"  alt="Cozy seating area at Papa Kape">
-    <img src="papa-kape-5.PNG"  alt="Close-up of Barako coffee">
-    <img src="papa-kape-6.PNG"  alt="Wooden beams inside Papa Kape">
-    <img src="papa-kape-7.PNG"  alt="Assorted Filipino merienda bites">
-    <img src="papa-kape-8.PNG"  alt="Warm lighting and décor">
-    <img src="papa-kape-9.PNG"  alt="Patio seating at Papa Kape">
-    <img src="papa-kape-10.PNG" alt="Baristas preparing coffee">
+    <img src="css/papa-kape-1.jpg"  alt="Barako coffee at Papa Kape">
+    <img src="css/papa-kape-2.jpg"  alt="Rustic interiors of Papa Kape">
+    <img src="css/papa-kape-3.jpg"  alt="Filipino pastries served in cafe">
+    <img src="css/papa-kape-4.jpg"  alt="Cozy seating area at Papa Kape">
+    <img src="css/papa-kape-5.PNG"  alt="Close-up of Barako coffee">
+    <img src="css/papa-kape-6.PNG"  alt="Wooden beams inside Papa Kape">
+    <img src="css/papa-kape-7.PNG"  alt="Assorted Filipino merienda bites">
+    <img src="css/papa-kape-8.PNG"  alt="Warm lighting and décor">
+    <img src="css/papa-kape-9.PNG"  alt="Patio seating at Papa Kape">
+    <img src="css/papa-kape-10.PNG" alt="Baristas preparing coffee">
   </div>
 
   <!-- Lightbox overlay (hidden by default; toggled by picture.js) -->
@@ -100,4 +100,40 @@
   <script src="picture.js"></script>
   <script src="reviews.js"></script>
 </body>
+
+<script type="module">
+  import Chatbox from 'https://cdn.jsdelivr.net/npm/@chaindesk/embeds@latest/dist/chatbox/index.js';
+
+  const widget = await Chatbox.initBubble({
+    agentId: 'cmojwi1gn0mwyy9nevmd09etl',
+    
+    // optional 
+    // If provided will create a contact for the user and link it to the conversation
+    contact: {
+      firstName: 'Bro',
+      lastName: 'Bro',
+      email: 'BRO@email.com',
+      phoneNumber: '123456',
+      userId: '42424242',
+    },
+    // optional
+    // Override initial messages
+    initialMessages: [
+      'Hello IntramuBRO how are you doing today?',
+      'How can I help you ?',
+    ],
+    // optional
+    // Provided context will be appended to the Agent system prompt
+    context: "The user you are talking to is Bro. Start by Greeting him by his name.",
+  });
+
+  // open the chat bubble
+  widget.open();
+
+  // close the chat bubble
+  widget.close()
+
+  // or 
+  widget.toggle()
+</script>
 </html>

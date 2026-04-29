@@ -33,9 +33,9 @@
 <section class="spot-section gallery-section">
   <h2>Photo Gallery</h2>
   <div class="grid-three">
-      <img src="casa-manila-1.jpg" alt="Casa Manila interior hall">
-      <img src="casa-manila-2.jpg" alt="Antique furniture in Casa Manila">
-      <img src="casa-manila-3.jpg" alt="Victorian-era decor">
+      <img src="css/casa-manila-1.jpg" alt="Casa Manila interior hall">
+      <img src="css/casa-manila-2.jpg" alt="Antique furniture in Casa Manila">
+      <img src="css/casa-manila-3.jpg" alt="Victorian-era decor">
   
   </div>
   <div class="lightbox-overlay"></div>
@@ -101,4 +101,39 @@
 <div id="lightbox-overlay" class="lightbox-overlay">
   <img id="lightbox-img" src="" alt="">
 </div>
+<script type="module">
+  import Chatbox from 'https://cdn.jsdelivr.net/npm/@chaindesk/embeds@latest/dist/chatbox/index.js';
+
+  const widget = await Chatbox.initBubble({
+    agentId: 'cmojwi1gn0mwyy9nevmd09etl',
+    
+    // optional 
+    // If provided will create a contact for the user and link it to the conversation
+    contact: {
+      firstName: 'Bro',
+      lastName: 'Bro',
+      email: 'BRO@email.com',
+      phoneNumber: '123456',
+      userId: '42424242',
+    },
+    // optional
+    // Override initial messages
+    initialMessages: [
+      'Hello IntramuBRO how are you doing today?',
+      'How can I help you ?',
+    ],
+    // optional
+    // Provided context will be appended to the Agent system prompt
+    context: "The user you are talking to is Bro. Start by Greeting him by his name.",
+  });
+
+  // open the chat bubble
+  widget.open();
+
+  // close the chat bubble
+  widget.close()
+
+  // or 
+  widget.toggle()
+</script>
 </html>

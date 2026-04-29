@@ -16,7 +16,7 @@
           rgba(26, 26, 26, 0.8), 
           rgba(44, 44, 44, 0.8)
         ),
-        url("intramuros.webp") center/cover no-repeat fixed;
+        url("css/intramuros.webp") center/cover no-repeat fixed;
       color: #e0e0e0;
       overflow-x: hidden;
     }
@@ -677,6 +677,7 @@
   width: 100px;
   height: 100px;
   object-fit: cover;
+  /*object-position: center;*/
   border-radius: 50%;
   margin-bottom: 0.75rem;
 }

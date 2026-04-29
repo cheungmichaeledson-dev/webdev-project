@@ -17,7 +17,7 @@
   <label for="sidebarC" class="overlay" aria-hidden="true"></label>
 
   <!-- Hero Banner -->
-  <section class="about-hero" style="background-image:url('intramuros-hero.jpg');">
+  <section class="about-hero" style="background-image:url('css/intramuros-hero.jpg');">
     <div class="hero-overlay">
       <h1>Our Passion for Intramuros</h1>
       <p>We’re a group of students who spent the last two months turning our vision into reality, sharing the beauty of Intramuros with everyone.</p>
@@ -44,35 +44,37 @@
       <div class="team-carousel">
      
         <div class="team-card">
-          <img src="default.png" alt="MEC" class="team-photo">
-          <h3>Michael Edson Cheung</h3>
+          <img src="team-pics/Franz.jpg" alt="BF" class="team-photo">
+          <h3>Bangayan, Francis</h3>
           <p>Member</p>
         </div>
         <div class="team-card">
-          <img src="default.png" alt="MJD" class="team-photo">
-          <h3>Mary Josephine Deximo</h3>
-          <p>Member</p>
+          <img src="css/default.png" alt="BAJ" class="team-photo">
+          <h3>Busante, Allan Jay</h3>
+          <p>Mastermind</p>
         </div>
         <div class="team-card">
-          <img src="default.png" alt="JCM" class="team-photo">
-          <h3>John Carlo Manlig</h3>
+          <img src="css/default.png" alt="CME" class="team-photo">
+          <h3>Cheung, Michael Edson</h3>
           <p>Member</p>
         </div>
                 <div class="team-card">
-          <img src="default.png" alt="JRR" class="team-photo">
-          <h3>John Rey Resulta</h3>
+          <img src="css/default.png" alt="PJA" class="team-photo">
+          <h3>Padua, John Albert</h3>
           <p>Member</p>
         </div>
         <div class="team-card">
-          <img src="default.png" alt="MAT" class="team-photo">
-          <h3>Ma. Aylassa Kyl Tumlos</h3>
+          <img src="css/default.png" alt="SRJA" class="team-photo">
+          <h3>Sebolino, Rojan Jay Andrew</h3>
           <p>Member</p>
         </div>
-        <div class="team-card">
-          <img src="default.png" alt="JVA" class="team-photo">
+        
+        <!--<div class="team-card">
+          <img src="css/default.png" alt="JVA" class="team-photo">
           <h3>James Vincent Angeles</h3>
           <p>Member</p>
         </div>
+        !-->
 
       </div>
     <div class="carousel-nav">
@@ -109,4 +111,40 @@
   <script src="script.js"></script>
 
 </body>
+
+<script type="module">
+  import Chatbox from 'https://cdn.jsdelivr.net/npm/@chaindesk/embeds@latest/dist/chatbox/index.js';
+
+  const widget = await Chatbox.initBubble({
+    agentId: 'cmojwi1gn0mwyy9nevmd09etl',
+    
+    // optional 
+    // If provided will create a contact for the user and link it to the conversation
+    contact: {
+      firstName: 'Bro',
+      lastName: 'Bro',
+      email: 'BRO@email.com',
+      phoneNumber: '123456',
+      userId: '42424242',
+    },
+    // optional
+    // Override initial messages
+    initialMessages: [
+      'Hello IntramuBRO how are you doing today?',
+      'How can I help you ?',
+    ],
+    // optional
+    // Provided context will be appended to the Agent system prompt
+    context: "The user you are talking to is Bro. Start by Greeting him by his name.",
+  });
+
+  // open the chat bubble
+  widget.open();
+
+  // close the chat bubble
+  widget.close()
+
+  // or 
+  widget.toggle()
+</script>
 </html>
