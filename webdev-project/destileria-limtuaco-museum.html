@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Visit Destileria Limtuaco Museum in Intramuros — the Philippines’ oldest distillery, now a museum showcasing its rich heritage and spirits.">
+  <title>IntraSpots | Destileria Limtuaco</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+ <div id="header-placeholder"></div>
+ <div id="sidebar-placeholder"></div>
+
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('destileria-limtuaco0-museum-hero.jpg');">
+    <div class="hero-content">
+      <h1>Destileria Limtuaco Museum</h1>
+      <p>Step into the Philippines' oldest distillery and discover over 170 years of spirit-making history.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="content">
+
+    <!-- Overview -->
+    <section class="spot-section">
+      <h2>Overview</h2>
+      <p>Founded in 1852, Destileria Limtuaco is the oldest distillery in the Philippines. Today, its restored stone house in Intramuros serves as a museum dedicated to the art of Filipino spirit-making. Visitors can explore antique equipment, vintage bottles, and the colorful legacy of five generations of master distillers.</p>
+    </section>
+
+    <!-- Image Gallery -->
+<section class="spot-section gallery-section">
+  <h2>Photo Gallery</h2>
+  <div class="grid-three">
+    <div class="lightbox-item">
+      <img src="css/destileria-limtuaco0-museum-1.jpg"alt="1">
+      <img src="css/destileria-limtuaco0-museum-2.jpg"alt="2">
+      <img src="css/destileria-limtuaco0-museum-3.jpg"alt="3">
+      <img src="css/destileria-limtuaco0-museum-4.jpg"alt="4">
+    </div>
+  </div>
+</section>
+
+    <!-- Key Features -->
+    <section class="spot-section">
+      <h2>Key Features</h2>
+      <ul>
+        <li>Oldest distillery in the Philippines, established in 1852</li>
+        <li>Restored bahay na bato with period architecture</li>
+        <li>Displays of antique distillation equipment and memorabilia</li>
+        <li>Optional tasting of local spirits like lambanog and liqueur de cacao</li>
+      </ul>
+    </section>
+
+    <!-- Interactive Map -->
+    <section class="spot-section">
+      <h2>Find It Here</h2>
+      <div class="map-container">
+       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1194422408726!2d120.9773446!3d14.5922691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca18384a0013%3A0x2476ee2674945c17!2sDestileria%20Limtuaco%20Museum!5e0!3m2!1sen!2sph!4v1748001490253!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <!-- User Reviews -->
+    <section class="spot-section reviews-section">
+    <h2>User Reviews</h2>
+
+
+    <p id="averageRating" class="average-stars">Loading average rating...</p>
+
+    <!-- Review List Container -->
+    <div id="reviewsList"></div>
+
+    <!-- New Review Form -->
+    <form id="reviewForm" class="review-form">
+        <input type="hidden" name="place" value="Destileria">
+        <input type="text" name="name"    placeholder="Your name" required>
+        <select name="rating" required>
+        <option value="">Rating</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+        </select>
+        <textarea name="review" rows="3" placeholder="Your review..." required></textarea>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 IntraSpots. All rights reserved.</p>
+  </footer>
+
+  <script src="barScript.js"></script>
+  <script src="script.js"></script>
+  <script src="picture.js"></script>
+  <script src="reviews.js"></script>
+</body>
+
+<script type="module">
+  import Chatbox from 'https://cdn.jsdelivr.net/npm/@chaindesk/embeds@latest/dist/chatbox/index.js';
+
+  const widget = await Chatbox.initBubble({
+    agentId: 'cmojwi1gn0mwyy9nevmd09etl',
+    
+    // optional 
+    // If provided will create a contact for the user and link it to the conversation
+    contact: {
+      firstName: 'Bro',
+      lastName: 'Bro',
+      email: 'BRO@email.com',
+      phoneNumber: '123456',
+      userId: '42424242',
+    },
+    // optional
+    // Override initial messages
+    initialMessages: [
+      'Hello IntramuBRO how are you doing today?',
+      'How can I help you ?',
+    ],
+    // optional
+    // Provided context will be appended to the Agent system prompt
+    context: "The user you are talking to is Bro. Start by Greeting him by his name.",
+  });
+
+  // open the chat bubble
+  widget.open();
+
+  // close the chat bubble
+  widget.close()
+
+  // or 
+  widget.toggle()
+</script>
+</html>

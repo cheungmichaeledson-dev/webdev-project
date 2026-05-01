@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Discover Casa Manila: a restored Spanish colonial house museum in Intramuros, with history, galleries, and photo-worthy corners.">
+  <title>IntraSpots | Casa Manila</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div id="header-placeholder"></div>
+ <div id="sidebar-placeholder"></div>
+
+
+
+  <!-- Hero -->
+  <section class="hero" style="background-image:url('css\san-agustin-hero.jpg');">
+    <div class="hero-content">
+    <h1>San Agustin Church</h1>
+    <p>Discover the timeless beauty of the oldest stone church in the Philippines, a UNESCO World Heritage site.</p>
+
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="content">
+    <!-- Overview -->
+    <section class="spot-section">
+      <h2>Overview</h2>
+            <p>
+        The <strong>San Agustin Church</strong>, officially known as the <em>Church of the Immaculate Conception of San Agustin</em>, is the oldest stone church in the Philippines. Completed in 1607, it has withstood numerous natural disasters and wars, including World War II, where it was the only building left intact in Intramuros. 
+      </p>
+      <p>
+        Recognized as a UNESCO World Heritage Site in 1993 under the collective title <em>Baroque Churches of the Philippines</em>,  the church is renowned for its Baroque architecture, intricate trompe-l'œil ceiling paintings, and historical significance.
+      </p>
+    </section>
+
+    <!-- Image Gallery -->
+    <section class="spot-section gallery-section">
+      <h2>Photo Gallery</h2>
+      <div class="grid-three">
+        <img src="css\san-agustin-church-1.jpeg" alt="1">
+        <img src="css\san-agustin-church-2.jpeg" alt="2">
+        <img src="css\san-agustin-church-3.jpeg" alt="3">
+        <img src="css\san-agustin-church-4.jpeg" alt="4">
+      </div>
+        <div class="lightbox-overlay"></div>
+    </section>
+
+    <!-- Key Features -->
+    <section class="spot-section">
+      <h2>🏛️ Architectural and Historical Highlights</h2>
+      <ul>
+         <ul>
+    <li><strong>Oldest Stone Church in the Philippines:</strong> Completed in 1607, it's the oldest stone church in the country, built with adobe stones from Bulacan and Rizal.</li>
+    <li><strong>Baroque Architecture:</strong> The church showcases Spanish Baroque design with a cruciform layout, ornate carvings, and a majestic altarpiece.</li>
+    <li><strong>Trompe-l'œil Ceiling Paintings:</strong> The vaulted ceiling features stunning 3D illusion paintings by Italian artists Alberoni and Dibella.</li>
+    <li><strong>Earthquake-Resistant Design:</strong> Thick walls and heavy buttresses represent "Earthquake Baroque" style, made to withstand frequent tremors.</li>
+    <li><strong>UNESCO World Heritage Site:</strong> Declared a UNESCO site in 1993 as part of the "Baroque Churches of the Philippines."</li>
+    <li><strong>Survivor of Disasters and War:</strong> The only structure in Intramuros to survive WWII bombings; it also withstood several earthquakes.</li>
+    <li><strong>Historic Tombs:</strong> Final resting place of notable figures including Spanish conquistador Miguel López de Legazpi.</li>
+    <li><strong>Active Worship Site:</strong> Still hosts regular Masses and is a popular location for weddings and religious events.</li>
+      </ul>
+    </section>
+
+    <!-- Interactive Map -->
+    <section class="spot-section">
+      <h2>Find It Here</h2>
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.1652330098327!2d120.97516929999998!3d14.589658799999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397ca3d387a2f81%3A0x281c87384c325cf7!2sCasa%20Manila!5e0!3m2!1sen!2sph!4v1747986988039!5m2!1sen!2sph" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </section>
+
+    <!-- User Reviews -->
+    <section class="spot-section reviews-section">
+    <h2>User Reviews</h2>
+
+
+    <p id="averageRating" class="average-stars">Loading average rating...</p>
+
+    <!-- Review List Container -->
+    <div id="reviewsList"></div>
+
+    <!-- New Review Form -->
+    <form id="reviewForm" class="review-form">
+        <input type="hidden" name="place" value="San Agustin Church">
+        <input type="text" name="name"    placeholder="Your name" required>
+        <select name="rating" required>
+        <option value="">Rating</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+        </select>
+        <textarea name="review" rows="3" placeholder="Your review..." required></textarea>
+        <button type="submit" class="btn btn-primary">Submit Review</button>
+    </form>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2025 IntraSpots. All rights reserved.</p>
+  </footer>
+  <script src="barScript.js"></script>
+  <script src="script.js"></script>
+  <script src="picture.js"></script>
+  <script src="reviews.js"></script>
+</body>
+
+<script type="module">
+  import Chatbox from 'https://cdn.jsdelivr.net/npm/@chaindesk/embeds@latest/dist/chatbox/index.js';
+
+  const widget = await Chatbox.initBubble({
+    agentId: 'cmojwi1gn0mwyy9nevmd09etl',
+    
+    // optional 
+    // If provided will create a contact for the user and link it to the conversation
+    contact: {
+      firstName: 'Bro',
+      lastName: 'Bro',
+      email: 'BRO@email.com',
+      phoneNumber: '123456',
+      userId: '42424242',
+    },
+    // optional
+    // Override initial messages
+    initialMessages: [
+      'Hello IntramuBRO how are you doing today?',
+      'How can I help you ?',
+    ],
+    // optional
+    // Provided context will be appended to the Agent system prompt
+    context: "The user you are talking to is Bro. Start by Greeting him by his name.",
+  });
+
+  // open the chat bubble
+  widget.open();
+
+  // close the chat bubble
+  widget.close()
+
+  // or 
+  widget.toggle()
+</script>
+</html>
