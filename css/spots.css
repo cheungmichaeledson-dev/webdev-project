@@ -1,0 +1,137 @@
+.gallery-section .grid-three {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.gallery-section .grid-three img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  filter: grayscale(70%);
+  transition: transform 0.3s, box-shadow 0.3s, filter 0.3s ease;
+}
+
+.gallery-section .grid-three img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5);
+  filter: grayscale(0%);
+}
+
+.grid-three .lightbox-item img {
+  width: 100%;
+  display: block;
+  cursor: zoom-in;
+  border-radius: 4px;
+}
+
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s;
+}
+
+.lightbox-overlay img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 4px;
+  cursor: zoom-out;
+}
+
+.lightbox-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  margin: 1rem 0;
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.reviews-section .review {
+  background: #ffffff;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.reviews-section .review p {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  margin: 0.25rem 0;
+  color: var(--muted);
+}
+
+.reviews-section .review p strong {
+  color: var(--accent-strong);
+}
+
+.reviews-section .review p:nth-child(1) {
+  font-size: 0.95rem;
+}
+
+.reviews-section .btn-secondary {
+  margin-top: 0.5rem;
+}
+
+.review-form {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea a {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #ffffff;
+  color: var(--text);
+}
+
+.review-form button {
+  justify-self: start;
+  padding: 0.5rem 1rem;
+}
+
+#reviewsList .review {
+  margin-bottom: 1rem;
+}
+
+.average-stars {
+  font-size: 1.2rem;
+  color: var(--accent-strong);
+  margin-bottom: 1rem;
+  text-align: left;
+}

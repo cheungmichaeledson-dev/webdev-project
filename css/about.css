@@ -1,0 +1,117 @@
+.about-hero {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 300px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.65) 45%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+
+.about-hero .hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 1rem;
+  
+}
+
+.about-hero .hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-hero .hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+
+@media (max-width: 768px) {
+  .about-hero {
+    height: 50vh;
+  }
+  .about-hero .hero-overlay h1 {
+    font-size: 2rem;
+  }
+  .about-hero .hero-overlay p {
+    font-size: 1rem;
+  }
+}
+
+.team-carousel {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.team-card {
+  min-width: 260px;
+  flex: 0 0 auto;
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  padding: 1rem;
+}
+
+.team-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+}
+
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% + 2rem);
+  left: -1rem;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.carousel-nav button {
+  background: rgba(0, 0, 0, 0.7);
+  border: none;
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background 0.3s;
+}
+
+.carousel-nav button:hover {
+  background: rgba(0, 0, 0, 0.8);
+}

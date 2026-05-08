@@ -1,5 +1,7 @@
 // script.js
 document.addEventListener('DOMContentLoaded', () => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // 1) Paragraph fade-in
   const paras = document.querySelectorAll('.content p');
   if (paras.length) {
@@ -26,6 +28,38 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlides(slideIndex);
   }
 
+  // 4) Scroll reveal for key sections/cards
+  const revealTargets = document.querySelectorAll(
+    '.spot-card, .spot-section, .cta-section, .updates-section'
+  );
+  if (revealTargets.length) {
+    revealTargets.forEach(el => el.classList.add('scroll-reveal'));
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealTargets.forEach(el => observer.observe(el));
+  }
+
+  // 4b) Parallax background for designated sections
+  const parallaxEls = document.querySelectorAll('[data-parallax]');
+  if (parallaxEls.length && !prefersReducedMotion) {
+    const onScroll = () => {
+      const scrollY = window.scrollY;
+      parallaxEls.forEach(el => {
+        const speed = parseFloat(el.dataset.parallaxSpeed || '0.25');
+        const offset = Math.round(scrollY * speed);
+        el.style.backgroundPosition = `center calc(50% + ${offset}px)`;
+      });
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
   // 3) Team carousel (horizontal scroll)
   const carousel = document.querySelector('.team-carousel');
   const btnNext  = document.getElementById('teamNext');
@@ -40,6 +74,23 @@ document.addEventListener('DOMContentLoaded', () => {
     carousel.addEventListener('mouseenter', () => clearInterval(autoRotate));
     carousel.addEventListener('mouseleave', () => {
       autoRotate = setInterval(() => carousel.scrollBy({ left: cardWidth, behavior: 'smooth' }), 4000);
+    });
+  }
+
+  // 3b) Home coverflow carousel (click to advance)
+  const coverflow = document.querySelector('.carousel-container');
+  if (coverflow) {
+    const radios = Array.from(coverflow.querySelectorAll('input[name="position"]'));
+    const advance = () => {
+      if (!radios.length) return;
+      const currentIndex = radios.findIndex(radio => radio.checked);
+      const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % radios.length : 0;
+      radios[nextIndex].checked = true;
+    };
+
+    coverflow.addEventListener('click', event => {
+      if (event.target instanceof HTMLInputElement) return;
+      advance();
     });
   }
 
@@ -108,5 +159,47 @@ document.addEventListener('DOMContentLoaded', () => {
   // 7) Auto-activate nav link
   document.querySelectorAll('.topbar nav a').forEach(a => {
     if (a.href === window.location.href) a.classList.add('active');
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Grab the modal and its internal elements
+  const modal = document.getElementById("spotModal");
+  const closeBtn = document.querySelector(".close-modal");
+  const modalImg = document.getElementById("modal-img");
+  const modalTitle = document.getElementById("modal-title");
+  const modalDesc = document.getElementById("modal-desc");
+
+  // 2. Grab all carousel cards
+  const carouselItems = document.querySelectorAll(".carousel-item");
+
+  // 3. Listen for clicks on every card
+  carouselItems.forEach(item => {
+    item.addEventListener("click", function() {
+      // Get the data attributes from the specific card you clicked
+      const title = this.getAttribute("data-title");
+      const desc = this.getAttribute("data-desc");
+      const imgsrc = this.getAttribute("data-img");
+
+      // Inject that text/image into the hidden modal
+      modalTitle.textContent = title;
+      modalDesc.textContent = desc;
+      modalImg.src = imgsrc;
+
+      // Reveal the modal
+      modal.classList.add("show");
+    });
+  });
+
+  // 4. Close the modal when clicking the 'X'
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("show");
+  });
+
+  // 5. Close the modal when clicking outside the white box (on the dark background)
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.classList.remove("show");
+    }
   });
 });
