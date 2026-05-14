@@ -123,25 +123,22 @@ body {
   content: "☰";
 }
 
-/* .sidebarToggle {
-  font-size: 24px;
-  cursor: pointer;
-  color: white;
-  background: none;
-  border: none;
-  transition: transform 0.3s ease;
-}
 
-.sidebarToggle::before {
-  content: "☰";
-  font-size: 28px;
-  display: inline-block;
-  transition: transform 0.3s ease;
-}
-
-#sidebarC:checked + .topbarWrapper .topbar .sidebarToggle::before {
-  content: "✖";
-  transform: rotate(180deg);
+.sidebar-link {
+  position: relative;
+  display: block;
+  padding: 12px 16px;
+  margin: 8px 0;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  background-image: var(--bg);
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
+  overflow: hidden;
+  filter: grayscale(70%);
+  transition: transform 0.3s ease, filter 0.3s ease;
 }
 
 .sidebar {
@@ -161,77 +158,6 @@ body {
   border-right: 1px solid var(--border);
 }
 
-#sidebarC:checked ~ .sidebar {
-  transform: translateX(0);
-}
-
-.sidebar h2,
-.sidebar a {
-  opacity: 0;
-  transform: translateX(-20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-#sidebarC:checked ~ .sidebar h2,
-#sidebarC:checked ~ .sidebar a {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.sidebar nav a {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-}
-
-.sidebar-thumb {
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.sidebar-link {
-  position: relative;
-  display: block;
-  padding: 12px 16px;
-  margin: 8px 0;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 500;
-  background-image: var(--bg);
-  background-size: cover;
-  background-position: center;
-  border-radius: 6px;
-  overflow: hidden;
-  filter: grayscale(70%);
-  transition: transform 0.3s ease, filter 0.3s ease;
-}
-
-.sidebar-link::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.28);
-}
-
-.sidebar-link span {
-  position: relative;
-  z-index: 1;
-}
-
-.sidebar-link:hover {
-  background-position: 50% 40%;
-  transform: translateY(-2px);
-  filter: grayscale(0%);
-}
-
-.sidebar a:hover {
-  color: var(--accent-strong);
-  text-decoration: underline;
-} */
-
 .overlay {
   position: fixed;
   top: 60px;
@@ -245,35 +171,30 @@ body {
   transition: opacity 0.3s ease;
 }
 
-/* #sidebarC:checked ~ .overlay {
-  opacity: 1;
-  pointer-events: auto;
-} */
 
 .content {
-  padding-top: 80px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
   transition: filter 0.3s ease, opacity 1.5s ease-out, transform 1.5s ease-out;
-  background: var(--surface);
   margin: 40px auto;
   max-width: 900px;
   border-radius: 12px;
   box-shadow: var(--shadow);
   color: var(--text);
-  filter: none !important;
   opacity: 0;
   transform: translateY(20px);
   animation: fadeIn 1.5s ease-out forwards;
   position: relative;
   z-index: 1;
+  align-items: center
 }
 
 
 
-/* #sidebarC:checked ~ .content {
-  filter: blur(2px) !important;
-} */
 
 @keyframes fadeIn {
   0% {
@@ -344,39 +265,6 @@ body {
   text-decoration: underline;
 }
 
-.spot-section {
-  background: var(--surface);
-  margin-bottom: 30px;
-  padding: 20px 25px;
-  border-radius: 10px;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-  transition: background 0.3s ease, transform 0.3s ease, border-color 0.3s ease;
-  border: 1px solid var(--border);
-}
-
-.spot-section:hover {
-  background: var(--surface-2);
-  transform: translateY(-3px);
-}
-
-.spot-section + .spot-section {
-  border-top: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.spot-section h1,
-.spot-section h2 {
-  margin-top: 0;
-}
-
-.spot-section p {
-  margin: 15px 0 0;
-  line-height: 1.7;
-}
-
-.spot-section a {
-  color: var(--accent);
-  text-decoration: underline;
-}
 
 @media (max-width: 768px) {
   .content {
@@ -461,13 +349,6 @@ body {
   margin-bottom: 1.25rem;
 }
 
-.hero-content .btn {
-  text-decoration: none;
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
-  font-weight: 600;
-}
 
 .hero-overlay {
   position: absolute;
@@ -576,8 +457,7 @@ body {
 }
 
 a:focus-visible,
-button:focus-visible,
-.vote-btn:focus-visible {
+button:focus-visible {
   outline: 2px solid var(--accent-strong);
   outline-offset: 3px;
   border-radius: 6px;
