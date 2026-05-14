@@ -64,10 +64,22 @@
       animation: fadeIn 1.5s ease forwards;
     }
 
+<<<<<<< Updated upstream
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-30px); }
       to { opacity: 1; transform: translateY(0); }
     }
+=======
+.team-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.75rem;
+  object-position:center;
+
+}
+>>>>>>> Stashed changes
 
     @keyframes fadeIn {
       from { opacity: 0; }
