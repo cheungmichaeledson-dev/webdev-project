@@ -11,13 +11,21 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --brown-dark:  #3b2412;
+      --brown-mid:   #7a4f2e;
+      --brown-soft:  #a0734a;
+      --brown-pale:  #c9a07a;
+      --gold:        #c8954a;
+      --ink:         #1c1208;
+    }
+
     html { scroll-behavior: smooth; }
 
     body {
       background-color: #ffffff;
-      background-image: none;
       min-height: 100vh;
-      color: #1a1a1a;
+      color: var(--ink);
       font-family: 'Cormorant Garamond', Georgia, serif;
       display: flex;
       flex-direction: column;
@@ -41,7 +49,7 @@
       font-size: 0.75rem;
       font-weight: 300;
       letter-spacing: 0.35em;
-      color: #7a6a55;
+      color: var(--brown-soft);
       text-transform: uppercase;
       margin-bottom: 20px;
     }
@@ -51,7 +59,7 @@
       font-size: clamp(3.2rem, 8vw, 6rem);
       font-weight: 300;
       font-style: italic;
-      color: #1a1a1a;
+      color: var(--brown-dark);
       line-height: 1;
       letter-spacing: 0.02em;
       text-align: center;
@@ -60,7 +68,7 @@
 
     h1 em {
       font-style: normal;
-      color: #e8b84b;
+      color: var(--gold);
     }
 
     .rule {
@@ -77,16 +85,16 @@
       content: '';
       flex: 1;
       height: 1px;
-      background: linear-gradient(to right, transparent, #5a8a6a);
+      background: linear-gradient(to right, transparent, var(--brown-pale));
     }
     .rule::after {
-      background: linear-gradient(to left, transparent, #5a8a6a);
+      background: linear-gradient(to left, transparent, var(--brown-pale));
     }
 
     .rule-diamond {
       width: 6px;
       height: 6px;
-      background: #e8b84b;
+      background: var(--gold);
       transform: rotate(45deg);
       flex-shrink: 0;
     }
@@ -95,11 +103,12 @@
       font-family: 'IM Fell English', Georgia, serif;
       font-style: italic;
       font-size: 1rem;
-      color: #7a6a55;
+      color: var(--brown-soft);
       letter-spacing: 0.04em;
       text-align: center;
     }
 
+    /* ── GRID ── */
     .spots-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -108,22 +117,21 @@
       max-width: 960px;
     }
 
-    /* last item if odd count: center it */
     .spots-grid > :last-child:nth-child(odd) {
       grid-column: 2 / 3;
     }
 
+    /* ── CARD ── */
     .spot-card {
       position: relative;
       display: block;
       height: 260px;
       text-decoration: none;
       overflow: hidden;
-      background: #0d2318;
+      background: var(--brown-dark);
       cursor: pointer;
     }
 
-    /* photograph layer */
     .spot-card__photo {
       position: absolute;
       inset: 0;
@@ -132,24 +140,23 @@
       background-position: center;
       opacity: 0.22;
       transform: scale(1.06);
-      transition:
-        opacity   0.7s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-      filter: sepia(20%) saturate(1.15) contrast(1.05);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: sepia(30%) contrast(1.05);
     }
 
     .spot-card__vignette {
       position: absolute;
       inset: 0;
       background:
-        linear-gradient(180deg, rgba(8,25,14,0.60) 0%, rgba(8,25,14,0.15) 40%, rgba(4,14,8,0.78) 100%),
-        radial-gradient(ellipse at center, transparent 40%, rgba(4,14,8,0.55) 100%);
-      transition: opacity 0.5s ease;
+        linear-gradient(180deg, rgba(30,10,2,0.55) 0%, rgba(30,10,2,0.15) 40%, rgba(20,6,0,0.78) 100%),
+        radial-gradient(ellipse at center, transparent 40%, rgba(15,5,0,0.5) 100%);
     }
 
     .spot-card__glow {
       position: absolute;
       inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 80%, rgba(200,149,74,0.15) 0%, transparent 70%);
       opacity: 0;
       transition: opacity 0.5s ease;
     }
@@ -170,7 +177,7 @@
       font-size: 0.65rem;
       font-weight: 300;
       letter-spacing: 0.3em;
-      color: #7a6a55;
+      color: var(--brown-pale);
       margin-bottom: 10px;
       opacity: 0;
       transform: translateY(6px);
@@ -182,7 +189,7 @@
       font-size: 1.35rem;
       font-weight: 400;
       font-style: italic;
-      color: rgba(245,239,227,0.72);
+      color: rgba(245,235,220,0.75);
       letter-spacing: 0.06em;
       text-align: center;
       line-height: 1.2;
@@ -192,7 +199,7 @@
     .spot-card__line {
       width: 0;
       height: 1px;
-      background: #e8b84b;
+      background: var(--gold);
       margin-top: 12px;
       transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -201,30 +208,27 @@
       font-family: 'Cormorant SC', serif;
       font-size: 0.65rem;
       letter-spacing: 0.28em;
-      color: #e8b84b;
+      color: var(--gold);
       margin-top: 10px;
       opacity: 0;
       transform: translateY(4px);
       transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
     }
 
-    /* border treatment */
     .spot-card::before {
       content: '';
       position: absolute;
       inset: 1px;
-      border: 1px solid rgba(224,112,72,0.0);
+      border: 1px solid rgba(200,149,74,0.0);
       z-index: 4;
       transition: border-color 0.4s ease;
       pointer-events: none;
     }
 
-    /* corner ornaments */
     .spot-card::after {
       content: '';
       position: absolute;
-      top: 10px; left: 10px;
-      right: 10px; bottom: 10px;
+      top: 10px; left: 10px; right: 10px; bottom: 10px;
       border-top: 1px solid transparent;
       border-left: 1px solid transparent;
       z-index: 4;
@@ -232,47 +236,18 @@
       pointer-events: none;
     }
 
-    .spot-card:hover .spot-card__photo {
-      opacity: 0.7;
-      transform: scale(1);
-    }
+    /* hover */
+    .spot-card:hover .spot-card__photo   { opacity: 0.7; transform: scale(1); }
+    .spot-card:hover .spot-card__glow    { opacity: 1; }
+    .spot-card:hover .spot-card__name    { color: #fff; font-size: 1.5rem; }
+    .spot-card:hover .spot-card__line    { width: 48px; }
+    .spot-card:hover .spot-card__num     { opacity: 1; transform: translateY(0); }
+    .spot-card:hover .spot-card__cta     { opacity: 1; transform: translateY(0); }
+    .spot-card:hover::before             { border-color: rgba(200,149,74,0.45); }
+    .spot-card:hover::after              { border-color: rgba(200,149,74,0.22); }
+    .spot-card:focus-visible             { outline: 2px solid var(--gold); outline-offset: 3px; }
 
-    .spot-card:hover .spot-card__glow {
-      opacity: 1;
-    }
-
-    .spot-card:hover .spot-card__name {
-      color: #1a1a1a;
-      font-size: 1.5rem;
-    }
-
-    .spot-card:hover .spot-card__line {
-      width: 48px;
-    }
-
-    .spot-card:hover .spot-card__num {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .spot-card:hover .spot-card__cta {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .spot-card:hover::before {
-      border-color: rgba(224,112,72,0.45);
-    }
-
-    .spot-card:hover::after {
-      border-color: rgba(224,112,72,0.22);
-    }
-
-    .spot-card:focus-visible {
-      outline: 2px solid #e8b84b;
-      outline-offset: 3px;
-    }
-
+    /* ── FOOTER ── */
     footer {
       margin-top: 64px;
       display: flex;
@@ -287,34 +262,24 @@
       font-family: 'Cormorant SC', serif;
       font-size: 0.65rem;
       letter-spacing: 0.3em;
-      color: #7a6a55;
+      color: var(--brown-soft);
     }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 680px) {
-      .spots-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-      .spots-grid > :last-child:nth-child(odd) {
-        grid-column: 1 / -1;
-      }
-      .spot-card {
-        height: 200px;
-      }
+      .spots-grid { grid-template-columns: repeat(2, 1fr); }
+      .spots-grid > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+      .spot-card { height: 200px; }
     }
-
     @media (max-width: 440px) {
-      .spots-grid {
-        grid-template-columns: 1fr;
-      }
-      .spots-grid > :last-child:nth-child(odd) {
-        grid-column: 1;
-      }
+      .spots-grid { grid-template-columns: 1fr; }
+      .spots-grid > :last-child:nth-child(odd) { grid-column: 1; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       * { transition-duration: 0.001ms !important; }
     }
 
+    /* ── ENTRANCE ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
       to   { opacity: 1; transform: translateY(0); }
@@ -326,7 +291,6 @@
       opacity: 0;
       animation: fadeUp 0.7s ease forwards;
     }
-
     .spot-card:nth-child(1) { animation-delay: 0.15s; }
     .spot-card:nth-child(2) { animation-delay: 0.25s; }
     .spot-card:nth-child(3) { animation-delay: 0.35s; }
@@ -337,9 +301,11 @@
   </style>
 </head>
 <body>
-   <div id="header-placeholder"></div>
+
+  <div id="header-placeholder"></div>
+
   <header class="page_header">
-    <p class="eyebrow">Intramuros, Manila Â· Heritage Guide</p>
+    <p class="eyebrow">Intramuros, Manila · Heritage Guide</p>
     <h1>Intra<em>Spots</em></h1>
     <div class="rule"><div class="rule-diamond"></div></div>
     <p class="subtitle">Walled city, living memory</p>
@@ -365,7 +331,7 @@
       <div class="spot-card__glow"></div>
       <div class="spot-card__content">
         <span class="spot-card__num">02</span>
-        <span class="spot-card__name">San AgustÃ­n Church</span>
+        <span class="spot-card__name">San Agustín Church</span>
         <div class="spot-card__line"></div>
         <span class="spot-card__cta">Explore</span>
       </div>
@@ -401,7 +367,7 @@
       <div class="spot-card__glow"></div>
       <div class="spot-card__content">
         <span class="spot-card__num">05</span>
-        <span class="spot-card__name">La Cathedral CafÃ©</span>
+        <span class="spot-card__name">La Cathedral Café</span>
         <div class="spot-card__line"></div>
         <span class="spot-card__cta">Explore</span>
       </div>
@@ -435,7 +401,7 @@
 
   <footer>
     <div class="rule"><div class="rule-diamond"></div></div>
-    <p class="footer-text">Est. 1571 Â· Within the Walls</p>
+    <p class="footer-text">Est. 1571 · Within the Walls</p>
   </footer>
 
   <script src="barScript.js"></script>

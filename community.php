@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>IntraSpots | Community</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
   <style>
     :root {
       --gold: #C9A84C;
@@ -56,8 +56,7 @@
     .hero-fallback {
       position: absolute;
       inset: 0;
-      background: 
-        linear-gradient(135deg, #2C1810 0%, #0E0C0A 50%, #1A1209 100%);
+      background: linear-gradient(135deg, #2C1810 0%, #0E0C0A 50%, #1A1209 100%);
     }
 
     .hero-grain {
@@ -125,10 +124,13 @@
       background: var(--dark-2);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 1.5rem 4rem;
+      padding: 1.5rem 2rem;
       display: flex;
       gap: 3rem;
       align-items: center;
+      width: 100vw;
+      margin: 0;
+      box-sizing: border-box;
     }
 
     .stat-item {
@@ -159,12 +161,13 @@
 
     /* ── MAIN LAYOUT ── */
     .community-main {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 4rem 2rem;
+      width: 100vw;
+      margin: 0;
+      padding: 3.5rem 1.5rem;
       display: grid;
-      grid-template-columns: 1fr 380px;
-      gap: 3rem;
+      grid-template-columns: 1fr 320px;
+      gap: 2.5rem;
+      box-sizing: border-box;
     }
 
     /* ── SECTION HEADERS ── */
@@ -218,7 +221,7 @@
     .carousel-track::-webkit-scrollbar { display: none; }
 
     .spot-card {
-      flex: 0 0 300px;
+      flex: 0 0 140px;
       scroll-snap-align: start;
       background: var(--dark-2);
       border: 1px solid var(--border);
@@ -317,12 +320,6 @@
       stroke-width: 2;
     }
 
-    .vote-btn.downvote:hover, .vote-btn.downvote.active {
-      background: rgba(180,60,60,0.1);
-      border-color: #E05555;
-      color: #E05555;
-    }
-
     .comment-count {
       font-size: 12px;
       color: var(--cream-muted);
@@ -331,7 +328,6 @@
       gap: 4px;
     }
 
-    /* carousel nav arrows */
     .carousel-nav {
       display: flex;
       gap: 8px;
@@ -374,8 +370,7 @@
       aspect-ratio: 16/9;
     }
 
-    .video-wrapper video,
-    .video-wrapper iframe {
+    .video-wrapper video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -457,7 +452,7 @@
       border-radius: 16px;
       padding: 1.5rem;
       margin-bottom: 1.25rem;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, opacity 0.3s ease;
     }
 
     .feed-post:hover { border-color: rgba(201,168,76,0.4); }
@@ -555,9 +550,7 @@
       margin-bottom: 1rem;
     }
 
-    .form-group {
-      margin-bottom: 1rem;
-    }
+    .form-group { margin-bottom: 1rem; }
 
     .form-group label {
       display: block;
@@ -633,22 +626,6 @@
     .btn-submit:hover { background: var(--gold-light); }
     .btn-submit:active { transform: scale(0.98); }
 
-    .login-notice {
-      text-align: center;
-      padding: 1.5rem;
-      background: var(--dark-3);
-      border-radius: 8px;
-      border: 1px dashed var(--border);
-      font-size: 13px;
-      color: var(--cream-muted);
-      margin-top: 0.5rem;
-    }
-
-    .login-notice a {
-      color: var(--gold);
-      text-decoration: none;
-    }
-
     /* ── SIDEBAR ── */
     .sidebar { position: relative; }
 
@@ -689,25 +666,10 @@
     }
 
     .rank.top { color: var(--gold-light); }
-
     .lb-info { flex: 1; }
-
-    .lb-name {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--cream);
-    }
-
-    .lb-category {
-      font-size: 11px;
-      color: var(--cream-muted);
-    }
-
-    .lb-votes {
-      font-size: 12px;
-      color: var(--gold);
-      font-weight: 500;
-    }
+    .lb-name { font-size: 13px; font-weight: 500; color: var(--cream); }
+    .lb-category { font-size: 11px; color: var(--cream-muted); }
+    .lb-votes { font-size: 12px; color: var(--gold); font-weight: 500; }
 
     .tag-cloud {
       display: flex;
@@ -769,15 +731,11 @@
 
 <div id="header-placeholder"></div>
 
-<!-- ── HERO WITH VIDEO ── -->
 <section class="community-hero">
   <div class="hero-fallback"></div>
-
-  <!-- Replace src with your actual video file -->
   <video autoplay muted loop playsinline poster="images/intramuros-hero.jpg">
     <source src="images/intramuros-video.mp4" type="video/mp4">
   </video>
-
   <div class="hero-grain"></div>
   <div class="hero-gradient"></div>
 
@@ -788,7 +746,6 @@
   </div>
 </section>
 
-<!-- ── STATS BAR ── -->
 <?php
   $totalSpots = $pdo->query("SELECT COUNT(*) FROM spots")->fetchColumn();
   $totalReviews = $pdo->query("SELECT COUNT(*) FROM reviews")->fetchColumn();
@@ -797,31 +754,29 @@
 ?>
 <div class="stats-bar">
   <div class="stat-item">
-    <span class="stat-num"><?= $totalSpots ?></span>
+    <span class="stat-num" id="stat-spots"><?= $totalSpots ?></span>
     <span class="stat-label">Spots</span>
   </div>
   <div class="stat-divider"></div>
   <div class="stat-item">
-    <span class="stat-num"><?= $totalReviews ?></span>
+    <span class="stat-num" id="stat-reviews"><?= $totalReviews ?></span>
     <span class="stat-label">Reviews</span>
   </div>
   <div class="stat-divider"></div>
   <div class="stat-item">
-    <span class="stat-num"><?= $totalVotes ?></span>
+    <span class="stat-num" id="stat-votes"><?= $totalVotes ?></span>
     <span class="stat-label">Upvotes</span>
   </div>
   <div class="stat-divider"></div>
   <div class="stat-item">
-    <span class="stat-num"><?= $totalUsers ?></span>
+    <span class="stat-num" id="stat-users"><?= $totalUsers ?></span>
     <span class="stat-label">Explorers</span>
   </div>
 </div>
 
-<!-- ── MAIN CONTENT ── -->
 <div class="community-main">
   <div class="left-col">
 
-    <!-- SPOT CAROUSEL -->
     <div class="spot-carousel">
       <div class="section-header">
         <h2 class="section-title">Explore <span>Spots</span></h2>
@@ -829,7 +784,7 @@
       </div>
 
       <?php
-        $spots = $pdo->query("SELECT s.*, COUNT(v.id) as vote_count, COUNT(r.id) as review_count
+        $spots = $pdo->query("SELECT s.*, COUNT(DISTINCT v.id) as vote_count, COUNT(DISTINCT r.id) as review_count
           FROM spots s
           LEFT JOIN votes v ON s.id = v.spot_id
           LEFT JOIN reviews r ON s.id = r.spot_id
@@ -851,7 +806,7 @@
               <p class="spot-card-desc"><?= htmlspecialchars($spot['description']) ?></p>
               <div class="spot-card-footer">
                 <div style="display:flex;gap:6px;">
-                  <button class="vote-btn upvote" onclick="event.stopPropagation(); handleVote(<?= $spot['id'] ?>, 'up', this)">
+                  <button type="button" class="vote-btn upvote" onclick="event.stopPropagation(); handleVote(<?= $spot['id'] ?>, 'up', this)">
                     <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
                     <span><?= $spot['vote_count'] ?></span>
                   </button>
@@ -872,16 +827,13 @@
       </div>
     </div>
 
-    <!-- VIDEO SECTION -->
     <div class="video-section">
       <div class="section-header">
         <h2 class="section-title">Discover <span>Intramuros</span></h2>
       </div>
       <div class="video-wrapper">
-        <!-- Replace with your actual video -->
         <video controls poster="images/intramuros-hero.jpg">
           <source src="images/intramuros-video.mp4" type="video/mp4">
-          <!-- Fallback if no video file -->
           <div class="video-placeholder">
             <div class="play-btn">
               <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
@@ -892,7 +844,6 @@
       </div>
     </div>
 
-    <!-- COMMUNITY FEED -->
     <div class="feed-section">
       <div class="section-header">
         <h2 class="section-title">Community <span>Reviews</span></h2>
@@ -905,45 +856,37 @@
         <button class="filter-pill" onclick="filterFeed('recent', this)">Most Recent</button>
       </div>
 
-      <!-- COMMENT FORM -->
       <div class="comment-form">
         <h3>Leave a Review</h3>
-        <?php if(isset($_SESSION['user_id'])): ?>
-          <form method="POST" action="submit_review.php">
-            <div class="form-group">
-              <label>Select Spot</label>
-              <select name="spot_id" id="spotSelect" required>
-                <option value="">Choose a spot...</option>
-                <?php foreach($spots as $s): ?>
-                  <option value="<?= $s['id'] ?>"><?= htmlspecialchars($s['name']) ?></option>
-                <?php endforeach; ?>
-              </select>
-            </div>
-            <div class="form-group">
-              <label>Rating</label>
-              <div class="rating-input" id="ratingInput">
-                <span onclick="setRating(1)">★</span>
-                <span onclick="setRating(2)">★</span>
-                <span onclick="setRating(3)">★</span>
-                <span onclick="setRating(4)">★</span>
-                <span onclick="setRating(5)">★</span>
-              </div>
-              <input type="hidden" name="rating" id="ratingValue" value="0">
-            </div>
-            <div class="form-group">
-              <label>Your Review</label>
-              <textarea name="comment" placeholder="Share your experience..." required></textarea>
-            </div>
-            <button type="submit" class="btn-submit">Post Review</button>
-          </form>
-        <?php else: ?>
-          <div class="login-notice">
-            <a href="login.php">Log in</a> or <a href="register.php">register</a> to leave a review and vote for your favorite spots.
+        <form id="reviewForm">
+          <div class="form-group">
+            <label>Select Spot</label>
+            <select name="spot_id" id="spotSelect" required>
+              <option value="">Choose a spot...</option>
+              <?php foreach($spots as $s): ?>
+                <option value="<?= $s['id'] ?>"><?= htmlspecialchars($s['name']) ?></option>
+              <?php endforeach; ?>
+            </select>
           </div>
-        <?php endif; ?>
+          <div class="form-group">
+            <label>Rating</label>
+            <div class="rating-input" id="ratingInput">
+              <span onclick="setRating(1)">★</span>
+              <span onclick="setRating(2)">★</span>
+              <span onclick="setRating(3)">★</span>
+              <span onclick="setRating(4)">★</span>
+              <span onclick="setRating(5)">★</span>
+            </div>
+            <input type="hidden" name="rating" id="ratingValue" value="0">
+          </div>
+          <div class="form-group">
+            <label>Your Review</label>
+            <textarea name="comment" placeholder="Share your experience..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Post Review</button>
+        </form>
       </div>
 
-      <!-- REVIEWS FEED -->
       <div id="reviewsFeed">
         <?php
           $reviews = $pdo->query("
@@ -957,7 +900,7 @@
         ?>
 
         <?php if(empty($reviews)): ?>
-          <div class="feed-post" style="text-align:center; color: var(--cream-muted); padding: 3rem;">
+          <div class="feed-post" id="emptyFeedMessage" style="text-align:center; color: var(--cream-muted); padding: 3rem;">
             <p style="font-family: var(--font-display); font-size:1.5rem; margin-bottom:0.5rem;">No reviews yet</p>
             <p style="font-size:13px;">Be the first to share your Intramuros experience!</p>
           </div>
@@ -980,11 +923,16 @@
                 </div>
               </div>
               <p class="post-comment"><?= htmlspecialchars($review['comment']) ?></p>
+              
               <div class="post-actions">
-                <button class="vote-btn upvote" onclick="handleVote(<?= $review['spot_id'] ?>, 'up', this)">
+                <button type="button" class="vote-btn upvote" onclick="handleVote(<?= $review['spot_id'] ?>, 'up', this)">
                   <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
                   Helpful
                 </button>
+
+                <?php if($review['user_id'] == 1): ?>
+                  <button type="button" class="vote-btn" style="color: #E05555; border-color: #E05555;" onclick="deleteReview(<?= $review['id'] ?>, this)">Delete</button>
+                <?php endif; ?>
               </div>
             </div>
           <?php endforeach; ?>
@@ -994,10 +942,8 @@
 
   </div>
 
-  <!-- ── SIDEBAR ── -->
   <aside class="sidebar">
 
-    <!-- LEADERBOARD -->
     <div class="sidebar-card">
       <h3>🏆 Most Upvoted Spots</h3>
       <?php
@@ -1022,7 +968,6 @@
       <?php endforeach; ?>
     </div>
 
-    <!-- CATEGORIES -->
     <div class="sidebar-card">
       <h3>Browse by Category</h3>
       <div class="tag-cloud">
@@ -1035,7 +980,6 @@
       </div>
     </div>
 
-    <!-- RECENT ACTIVITY -->
     <div class="sidebar-card">
       <h3>Recent Activity</h3>
       <?php
@@ -1063,20 +1007,17 @@
   </aside>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 <script src="barScript.js"></script>
 <script src="script.js"></script>
 
 <script>
-  // Carousel scroll
   function scrollCarousel(dir) {
     const track = document.getElementById('spotCarousel');
     track.scrollBy({ left: dir * 320, behavior: 'smooth' });
   }
 
-  // Select spot for review form
   function selectSpot(id, name) {
     const sel = document.getElementById('spotSelect');
     if (sel) {
@@ -1085,7 +1026,6 @@
     }
   }
 
-  // Star rating
   let currentRating = 0;
   function setRating(val) {
     currentRating = val;
@@ -1094,32 +1034,146 @@
     stars.forEach((s, i) => s.classList.toggle('active', i < val));
   }
 
-  // Vote handler (wires to your PHP later)
+  // --- AJAX UPVOTE ---
   function handleVote(spotId, type, btn) {
-    <?php if(isset($_SESSION['user_id'])): ?>
-      fetch('api/vote.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ spot_id: spotId, type: type })
-      })
-      .then(r => r.json())
-      .then(data => {
-        if (data.success) {
-          btn.classList.toggle('active');
-          const countEl = btn.querySelector('span');
-          if (countEl) countEl.textContent = data.new_count;
-          showToast(data.message);
-        } else {
-          showToast(data.message || 'Already voted!');
-        }
-      });
-    <?php else: ?>
-      showToast('Please log in to vote!');
-      setTimeout(() => window.location.href = 'login.php', 1500);
-    <?php endif; ?>
+    fetch('api/vote.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ spot_id: spotId, type: type })
+    })
+    .then(r => r.json())
+    .then(data => {
+      if (data.success) {
+        btn.classList.toggle('active');
+        const countEl = btn.querySelector('span');
+        if (countEl) countEl.textContent = data.new_count;
+        showToast(data.message);
+      } else {
+        showToast(data.message || 'Error processing vote');
+      }
+    })
+    .catch(err => {
+      console.error("Vote Error:", err);
+      showToast('Network error.');
+    });
   }
 
-  // Filter feed
+  // --- AJAX SUBMIT REVIEW ---
+  document.getElementById('reviewForm').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    const formData = new FormData(this); 
+
+    fetch('submit_review.php', {
+      method: 'POST',
+      body: formData
+    })
+    .then(async res => {
+      const text = await res.text(); // Read the raw text first
+      try {
+        return JSON.parse(text); // Try to parse it
+      } catch(err) {
+        console.error("Raw Server Response:", text);
+        throw new Error("Server did not send valid JSON.");
+      }
+    })
+    .then(data => {
+      if (data.success) {
+        showToast(data.message);
+        
+        // Reset the form visually
+        this.reset();
+        setRating(0); 
+        document.getElementById('spotSelect').value = '';
+
+        // Format Date
+        const dateObj = new Date(data.review.created_at);
+        const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        const avatarChars = data.review.username.substring(0, 2).toUpperCase();
+        
+        // Format Stars
+        let starsHtml = '';
+        for(let i = 1; i <= 5; i++) {
+          starsHtml += `<span class="star ${i <= data.review.rating ? '' : 'empty'}">★</span>`;
+        }
+
+        // Build the HTML
+        const newReviewHtml = `
+          <div class="feed-post" data-rating="${data.review.rating}">
+            <div class="post-header">
+              <div class="avatar">${avatarChars}</div>
+              <div class="post-meta">
+                <p class="post-author">${data.review.username}</p>
+                <p class="post-spot">@ ${data.review.spot_name}</p>
+              </div>
+              <div>
+                <div class="post-rating">${starsHtml}</div>
+                <p class="post-time">${formattedDate}</p>
+              </div>
+            </div>
+            <p class="post-comment">${data.review.comment}</p>
+            <div class="post-actions">
+              <button type="button" class="vote-btn upvote" onclick="handleVote(${data.review.spot_id}, 'up', this)">
+                <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+                Helpful
+              </button>
+              <button type="button" class="vote-btn" style="color: #E05555; border-color: #E05555;" onclick="deleteReview(${data.review.id}, this)">Delete</button>
+            </div>
+          </div>
+        `;
+
+        const feedContainer = document.getElementById('reviewsFeed');
+        const emptyMessage = document.getElementById('emptyFeedMessage');
+        if(emptyMessage) emptyMessage.remove();
+        
+        // Inject instantly
+        feedContainer.insertAdjacentHTML('afterbegin', newReviewHtml);
+
+      } else {
+        showToast(data.message);
+      }
+    })
+    .catch(err => {
+      console.error("Submit Error:", err);
+      showToast('Error connecting to server. Check console.');
+    });
+  });
+
+  // --- AJAX DELETE REVIEW ---
+  function deleteReview(reviewId, btnElement) {
+    // If you hit "Cancel" on the popup, it stops here
+    if(!confirm('Are you sure you want to delete this review?')) return;
+
+    fetch('delete_review.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ review_id: reviewId })
+    })
+    .then(async res => {
+      const text = await res.text();
+      try {
+        return JSON.parse(text);
+      } catch(err) {
+        console.error("Raw Server Response:", text);
+        throw new Error("Server did not send valid JSON.");
+      }
+    })
+    .then(data => {
+      if(data.success) {
+        showToast(data.message);
+        const postElement = btnElement.closest('.feed-post');
+        postElement.style.opacity = "0";
+        setTimeout(() => postElement.remove(), 300);
+      } else {
+        showToast(data.message);
+      }
+    })
+    .catch(err => {
+      console.error("Delete Error:", err);
+      showToast('Error connecting to server. Check console.');
+    });
+  }
+
+  // --- UI FILTERS & TOASTS ---
   function filterFeed(val, btn) {
     document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
@@ -1132,19 +1186,103 @@
     });
   }
 
-  // Filter by category
   function filterByCategory(cat) {
     showToast('Filtering by: ' + cat);
   }
 
-  // Toast notification
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
-</script>
+  // --- REAL-TIME LIVE FEED (HOT RELOAD) ---
+  
+  // 1. Function to build the HTML for the reviews
+  function renderFeed(reviews) {
+    const feedContainer = document.getElementById('reviewsFeed');
+    
+    if (reviews.length === 0) {
+      feedContainer.innerHTML = `
+        <div class="feed-post" id="emptyFeedMessage" style="text-align:center; color: var(--cream-muted); padding: 3rem;">
+          <p style="font-family: var(--font-display); font-size:1.5rem; margin-bottom:0.5rem;">No reviews yet</p>
+          <p style="font-size:13px;">Be the first to share your Intramuros experience!</p>
+        </div>`;
+      return;
+    }
 
+    let html = '';
+    
+    reviews.forEach(review => {
+      // Format Date
+      const dateObj = new Date(review.created_at);
+      const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+      const avatarChars = review.username.substring(0, 2).toUpperCase();
+      
+      // Format Stars
+      let starsHtml = '';
+      for(let i = 1; i <= 5; i++) {
+        starsHtml += `<span class="star ${i <= review.rating ? '' : 'empty'}">★</span>`;
+      }
+
+      // Check if current user is user 1 (for the delete button)
+      // TEMPORARY BYPASS: We are assuming the current viewer is user 1
+      const deleteBtn = (review.user_id == 1) 
+        ? `<button type="button" class="vote-btn" style="color: #E05555; border-color: #E05555;" onclick="deleteReview(${review.id}, this)">Delete</button>` 
+        : '';
+
+      html += `
+        <div class="feed-post" data-rating="${review.rating}">
+          <div class="post-header">
+            <div class="avatar">${avatarChars}</div>
+            <div class="post-meta">
+              <p class="post-author">${review.username}</p>
+              <p class="post-spot">@ ${review.spot_name}</p>
+            </div>
+            <div>
+              <div class="post-rating">${starsHtml}</div>
+              <p class="post-time">${formattedDate}</p>
+            </div>
+          </div>
+          <p class="post-comment">${review.comment}</p>
+          <div class="post-actions">
+            <button type="button" class="vote-btn upvote" onclick="handleVote(${review.spot_id}, 'up', this)">
+              <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              Helpful
+            </button>
+            ${deleteBtn}
+          </div>
+        </div>
+      `;
+    });
+
+    // Update the container smoothly
+    feedContainer.innerHTML = html;
+  }
+
+  // 2. Function to fetch the data from our new API
+  function fetchLiveFeed() {
+    fetch('api/fetch_reviews.php')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Update the feed
+          renderFeed(data.reviews);
+          
+          // Update the Stats Bar!
+          if(data.stats) {
+            document.getElementById('stat-spots').innerText = data.stats.spots;
+            document.getElementById('stat-reviews').innerText = data.stats.reviews;
+            document.getElementById('stat-votes').innerText = data.stats.votes;
+            document.getElementById('stat-users').innerText = data.stats.users;
+          }
+        }
+      })
+      .catch(err => console.error("Live feed sync error:", err));
+  }
+
+  // 3. Start the Hot Reload loop! (Checks every 3 seconds)
+  setInterval(fetchLiveFeed, 3000);
+</script>
 </body>
 </html>
