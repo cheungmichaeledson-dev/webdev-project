@@ -37,11 +37,11 @@
     /* ── HERO BANNER ── */
     .community-hero {
       position: relative;
-      height: 70vh;
-      min-height: 500px;
+      height: 42vh;
+      min-height: 280px;
       display: flex;
       align-items: flex-end;
-      padding: 4rem;
+      padding: 2rem 2.5rem;
       overflow: hidden;
       width: 100%;
     }
@@ -102,11 +102,11 @@
 
     .hero-title {
       font-family: var(--font-display);
-      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-size: clamp(1.5rem, 3vw, 2.5rem);
       font-weight: 900;
       line-height: 1.05;
       color: var(--cream);
-      margin-bottom: 1.25rem;
+      margin-bottom: 0.75rem;
     }
 
     .hero-title span {
@@ -115,10 +115,10 @@
     }
 
     .hero-subtitle {
-      font-size: 1rem;
+      font-size: 0.85rem;
       color: var(--cream-muted);
-      line-height: 1.7;
-      max-width: 480px;
+      line-height: 1.6;
+      max-width: 420px;
     }
 
     /* ── STATS BAR (FIXED WIDTH) ── */
@@ -126,9 +126,9 @@
       background: var(--dark-2);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
-      padding: 1.5rem 2rem;
+      padding: 0.6rem 2rem;
       display: flex;
-      gap: 3rem;
+      gap: 1.5rem;
       align-items: center;
       width: 100%; /* Changed from 100vw to fix page stretching */
       box-sizing: border-box;
@@ -142,7 +142,7 @@
 
     .stat-num {
       font-family: var(--font-display);
-      font-size: 1.75rem;
+      font-size: 1.1rem;
       font-weight: 700;
       color: var(--gold);
     }
@@ -156,7 +156,7 @@
 
     .stat-divider {
       width: 1px;
-      height: 40px;
+      height: 28px;
       background: var(--border);
     }
 
@@ -164,17 +164,10 @@
     .community-main {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 4rem 2rem;
+      padding: 1.5rem 1.25rem;
       display: grid;
-      /* minmax(0, 1fr) is critical to force the carousel to scroll instead of pushing the sidebar */
-      grid-template-columns: minmax(0, 1fr) 320px; 
-      gap: 2.5rem;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    .left-col {
-      min-width: 0; /* Prevents column blowout */
+      grid-template-columns: 1fr 260px;
+      gap: 1.5rem;
     }
 
     /* ── SECTION HEADERS ── */
@@ -182,12 +175,12 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
 
     .section-title {
       font-family: var(--font-display);
-      font-size: 1.75rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--cream);
     }
@@ -215,6 +208,7 @@
       position: relative;
       margin-bottom: 4rem;
       width: 100%;
+      margin-bottom: 1.5rem;
     }
 
     .carousel-track {
@@ -230,7 +224,7 @@
     .carousel-track::-webkit-scrollbar { display: none; }
 
     .spot-card {
-      flex: 0 0 280px; /* Consistent card width */
+      flex: 0 0 140px;
       scroll-snap-align: start;
       background: var(--dark-2);
       border: 1px solid var(--border);
@@ -248,14 +242,14 @@
 
     .spot-card-img {
       width: 100%;
-      height: 180px;
+      height: 120px;
       object-fit: cover;
       display: block;
     }
 
     .spot-card-img-placeholder {
       width: 100%;
-      height: 180px;
+      height: 120px;
       background: linear-gradient(135deg, var(--dark-3), var(--accent));
       display: flex;
       align-items: center;
@@ -265,7 +259,7 @@
     }
 
     .spot-card-body {
-      padding: 1.25rem;
+      padding: 0.85rem;
     }
 
     .spot-card-category {
@@ -278,10 +272,10 @@
 
     .spot-card-name {
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--cream);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
     }
 
     .spot-card-desc {
@@ -368,8 +362,7 @@
 
     /* ── VIDEO SECTION ── */
     .video-section {
-      margin-bottom: 4rem;
-      width: 100%;
+      margin-bottom: 1.5rem;
     }
 
     .video-wrapper {
@@ -419,10 +412,10 @@
     .feed-post {
       background: var(--dark-2);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
-      transition: border-color 0.2s, opacity 0.3s ease;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
+      transition: border-color 0.2s;
     }
 
     .feed-post:hover { border-color: rgba(201,168,76,0.4); }
@@ -508,9 +501,9 @@
     .comment-form {
       background: var(--dark-2);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.25rem;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.85rem;
     }
 
     .comment-form h3 {
@@ -597,22 +590,22 @@
     .btn-submit:active { transform: scale(0.98); }
 
     /* ── SIDEBAR ── */
-    .sidebar { width: 320px; }
+    .sidebar { width: 280px; }
 
     .sidebar-card {
       background: var(--dark-2);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
+      border-radius: 12px;
+      padding: 0.85rem;
+      margin-bottom: 0.85rem;
     }
 
     .sidebar-card h3 {
       font-family: var(--font-display);
-      font-size: 1rem;
+      font-size: 0.85rem;
       color: var(--cream);
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.75rem;
+      margin-bottom: 0.85rem;
+      padding-bottom: 0.5rem;
       border-bottom: 1px solid var(--border);
     }
 

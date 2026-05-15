@@ -62,7 +62,7 @@
   margin-right: 600px;
   position: fixed;
   top: 10px;
-  right: 10px;
+  left: 10px;
   font-size: 18px;
   background: transparent;
   color: var(--text, #111111);
