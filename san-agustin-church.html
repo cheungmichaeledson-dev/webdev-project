@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,16 +7,17 @@
   <meta name="description" content="Discover Casa Manila: a restored Spanish colonial house museum in Intramuros, with history, galleries, and photo-worthy corners.">
   <title>IntraSpots | Casa Manila</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/spots.css">
+<link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/spots.css" />
 </head>
 <body>
  <div id="header-placeholder"></div>
- <div id="sidebar-placeholder"></div>
 
 
 
-  <!-- Hero -->
+
+  
   <section class="hero" style="background-image:url('images/san-agustin-hero.jpg');">
     <div class="hero-content">
     <h1>San Agustin Church</h1>
@@ -25,20 +26,20 @@
     </div>
   </section>
 
-  <!-- Main Content -->
+  
   <main class="content">
-    <!-- Overview -->
+    
     <section class="spot-section">
       <h2>Overview</h2>
             <p>
         The <strong>San Agustin Church</strong>, officially known as the <em>Church of the Immaculate Conception of San Agustin</em>, is the oldest stone church in the Philippines. Completed in 1607, it has withstood numerous natural disasters and wars, including World War II, where it was the only building left intact in Intramuros. 
       </p>
       <p>
-        Recognized as a UNESCO World Heritage Site in 1993 under the collective title <em>Baroque Churches of the Philippines</em>,  the church is renowned for its Baroque architecture, intricate trompe-l'œil ceiling paintings, and historical significance.
+        Recognized as a UNESCO World Heritage Site in 1993 under the collective title <em>Baroque Churches of the Philippines</em>,  the church is renowned for its Baroque architecture, intricate trompe-l'Å“il ceiling paintings, and historical significance.
       </p>
     </section>
 
-    <!-- Image Gallery -->
+    
     <section class="spot-section gallery-section">
       <h2>Photo Gallery</h2>
       <div class="grid-three">
@@ -50,23 +51,23 @@
         <div class="lightbox-overlay"></div>
     </section>
 
-    <!-- Key Features -->
+    
     <section class="spot-section">
-      <h2>🏛️ Architectural and Historical Highlights</h2>
+      <h2>ðŸ›ï¸ Architectural and Historical Highlights</h2>
       <ul>
          <ul>
     <li><strong>Oldest Stone Church in the Philippines:</strong> Completed in 1607, it's the oldest stone church in the country, built with adobe stones from Bulacan and Rizal.</li>
     <li><strong>Baroque Architecture:</strong> The church showcases Spanish Baroque design with a cruciform layout, ornate carvings, and a majestic altarpiece.</li>
-    <li><strong>Trompe-l'œil Ceiling Paintings:</strong> The vaulted ceiling features stunning 3D illusion paintings by Italian artists Alberoni and Dibella.</li>
+    <li><strong>Trompe-l'Å“il Ceiling Paintings:</strong> The vaulted ceiling features stunning 3D illusion paintings by Italian artists Alberoni and Dibella.</li>
     <li><strong>Earthquake-Resistant Design:</strong> Thick walls and heavy buttresses represent "Earthquake Baroque" style, made to withstand frequent tremors.</li>
     <li><strong>UNESCO World Heritage Site:</strong> Declared a UNESCO site in 1993 as part of the "Baroque Churches of the Philippines."</li>
     <li><strong>Survivor of Disasters and War:</strong> The only structure in Intramuros to survive WWII bombings; it also withstood several earthquakes.</li>
-    <li><strong>Historic Tombs:</strong> Final resting place of notable figures including Spanish conquistador Miguel López de Legazpi.</li>
+    <li><strong>Historic Tombs:</strong> Final resting place of notable figures including Spanish conquistador Miguel LÃ³pez de Legazpi.</li>
     <li><strong>Active Worship Site:</strong> Still hosts regular Masses and is a popular location for weddings and religious events.</li>
       </ul>
     </section>
 
-    <!-- Interactive Map -->
+    
     <section class="spot-section">
       <h2>Find It Here</h2>
       <div class="map-container">
@@ -74,27 +75,27 @@
       </div>
     </section>
 
-    <!-- User Reviews -->
+    
     <section class="spot-section reviews-section">
     <h2>User Reviews</h2>
 
 
     <p id="averageRating" class="average-stars">Loading average rating...</p>
 
-    <!-- Review List Container -->
+    
     <div id="reviewsList"></div>
 
-    <!-- New Review Form -->
+    
     <form id="reviewForm" class="review-form">
         <input type="hidden" name="place" value="San Agustin Church">
         <input type="text" name="name"    placeholder="Your name" required>
         <select name="rating" required>
         <option value="">Rating</option>
-        <option value="5">★★★★★</option>
-        <option value="4">★★★★☆</option>
-        <option value="3">★★★☆☆</option>
-        <option value="2">★★☆☆☆</option>
-        <option value="1">★☆☆☆☆</option>
+        <option value="5">â˜…â˜…â˜…â˜…â˜…</option>
+        <option value="4">â˜…â˜…â˜…â˜…â˜†</option>
+        <option value="3">â˜…â˜…â˜…â˜†â˜†</option>
+        <option value="2">â˜…â˜…â˜†â˜†â˜†</option>
+        <option value="1">â˜…â˜†â˜†â˜†â˜†</option>
         </select>
         <textarea name="review" rows="3" placeholder="Your review..." required></textarea>
         <button type="submit" class="btn btn-primary">Submit Review</button>
@@ -112,3 +113,4 @@
   <script src="reviews.js"></script>
 </body>
 </html>
+

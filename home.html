@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -6,92 +6,171 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="IntraSpots: Explore top hangout spots, hidden gems, and plan your perfect Intramuros adventure.">
   <title>IntraSpots | Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
 
- <div id="header-placeholder"></div>
+  
+  <div id="header-placeholder"></div>
 
-    <!-- Hero Section -->
-  <section class="hero parallax" data-parallax data-parallax-speed="0.25" style="background-image:url('images/intramuros-hero.jpg');">
-    <div class="hero-overlay">
-      <h1>Welcome to IntraSpots</h1>
-      <p>Your gateway to the best cafés, corners, and hidden treasures of Intramuros.</p>
-      <a href="#area-carousel" class="btn btn-primary">Discover Now</a>
+  
+  <section class="hero parallax"
+           style="background-image:url('images/main.png');">
+    <div class="hero_overlay">
+      <div class="hero_content">
+        <span class="hero_eyebrow">Discover Intramuros</span>
+        <h1 class="hero_title">Your Gateway to<br>History &amp; Hidden Gems</h1>
+        <p class="hero_sub">
+          Step inside the Walled City â€” find the best cafÃ©s, corners,
+          and centuries-old secrets waiting around every cobblestone turn.
+        </p>
+        <div class="hero_actions">
+          <a href="#featured-areas" class="btn btn_solid">Discover Now</a>
+          <a href="sidebar.html" class="btn btn_ghost">Learn More</a>
+        </div>
+      </div>
     </div>
   </section>
 
   
-  <main id="area-preview" class="content">
+  <section id="featured-areas" class="cards_section">
+    <div class="cards_header">
+      <h2>Discover the Rich History of Intramuros</h2>
+    </div>
+
     
-  <h2>Featured Areas</h2>
-  
-  <div class="carousel-container">
-  <input type="radio" name="position" checked />
-  <input type="radio" name="position" />
-  <input type="radio" name="position" />
-    <input type="radio" name="position" />
+    <div class="carousel_container">
+      <input type="radio" name="position" checked />
       <input type="radio" name="position" />
+      <input type="radio" name="position" />
+  
 
-  <div id="area-carousel" class="carousel-stage">
-    
-    <!-- Added data-* attributes to store modal info -->
-    <div class="carousel-item" style="background-image: url('images/papa-kape-hero.jpg');"
-         data-title="Papa Kape"
-         data-desc="Rustic café set inside a 400-year-old cistern, serving bold kapeng barako and Filipino merienda."
-         data-img="images/papa-kape-hero.jpg">
-      <div class="carousel-caption">Papa Kape</div>
+      <div id="area-carousel" class="carousel_stage">
+
+        <div class="carousel_item"
+             style="background-image: url('images/papa-kape-hero.jpg');"
+             data-title="Papa Kape"
+             data-desc="Rustic cafÃ© set inside a 400-year-old cistern, serving bold kapeng barako and Filipino merienda."
+             data-img="images/papa-kape-hero.jpg">
+          <div class="carousel_caption">Papa Kape</div>
+        </div>
+
+        <div class="carousel_item"
+             style="background-image: url('images/destileria-limtuaco0-museum-1.jpg');"
+             data-title="Destileria Limtuaco"
+             data-desc="Step into the Philippines' oldest distillery museum â€” see vintage equipment and sample artisanal spirits."
+             data-img="images/destileria-limtuaco0-museum-1.jpg">
+          <div class="carousel_caption">Destileria Limtuaco</div>
+        </div>
+
+        <div class="carousel_item"
+             style="background-image: url('images/casa-manila.jpg');"
+             data-title="Casa Manila"
+             data-desc="Discover life in 19th-century Manila through exquisitely restored period rooms and decor."
+             data-img="images/casa-manila.jpg">
+          <div class="carousel_caption">Casa Manila</div>
+        </div>
+
+          
+      </div>
+    </div>
+
+   
+    <div id="spotModal" class="modal_overlay">
+      <div class="modal_content">
+        <span class="close_modal">&times;</span>
+        <img id="modal-img" src="" alt="Spot Image">
+        <h2 id="modal-title">Title</h2>
+        <p id="modal-desc">Description goes here.</p>
+      </div>
+    </div>
+
+    <div class="cards_cta">
+      <a href="sidebar.html" class="btn btn_solid">See More</a>
+    </div>
+  </section>
+
+  
+  <section class="horizontal_strip" id="sectionPin">
+    <div class="horizontal_inner horizontal_wrap">
+      <div class="horizontal_text horizontal_text_container">
+        <h2>Timeless Charm &amp;<br>Rich Heritage</h2>
+        <p>Visiting Intramuros offers a deep dive into Manila's vibrant history
+           and culture. Marvel at stunning architecture that tells the stories
+           of a bygone era while enjoying unique experiences at every corner.</p>
+      </div>
+      <img src= "images/left.png"      alt="Papa Kape"          class="horizontal_img_1" />
+      <img src="images/left1.png" alt="Destileria"              class="horizontal_img_2" />
+      <img src="images/left2.png"         alt="Casa Manila"        class="horizontal_img_3" />
+      <img src="images/left3.png"     alt="Intramuros"         class="horizontal_img_4" />
+      <img src="images/left4.png"     alt="Intramuros"         class="horizontal_img_5" />
     </div>
     
-    <div class="carousel-item" style="background-image: url('images/destileria-limtuaco0-museum-1.jpg');"
-         data-title="Destileria Limtuaco"
-         data-desc="Step into the Philippines’ oldest distillery museum—see vintage equipment and sample artisanal spirits."
-         data-img="images/destileria-limtuaco0-museum-1.jpg">f
-      <div class="carousel-caption">Destileria Limtuaco</div>
+  </section>
+
+  <section id="services" class="services" id="target-section">
+    <div class="services_intro">
+      <span class="services_tag">Explore</span>
+      <h2 class="services_title">Your Gateway to<br>Intramuros History</h2>
+      <p class="services_text">
+        Immerse yourself in the rich history of Intramuros with our diverse tools.
+        Whether you prefer guided routes or exploring at your own pace,
+        we have something for everyone.
+      </p>
     </div>
-    
-    <div class="carousel-item" style="background-image: url('images/casa-manila.jpg');"
-         data-title="Casa Manila"
-         data-desc="Discover life in 19th-century Manila through exquisitely restored period rooms and decor."
-         data-img="images/casa-manila.jpg">
-      <div class="carousel-caption">Casa Manila</div>
+
+    <div class="services_grid">
+
+      <div class="service_card reveal">
+        <div class="service_icon"></div>
+        <h3>Interactive Maps &amp; Navigation</h3>
+        <p>Find your way with ease through detailed maps highlighting key landmarks, historical sites, and hidden spots.</p>
+      </div>
+
+      <div class="service_card reveal">
+        <div class="service_icon"></div>
+        <h3>User Reviews &amp; Ratings</h3>
+        <p>Read authentic feedback from fellow explorers and share your own experiences to guide others safely.</p>
+      </div>
+
+      <div class="service_card reveal">
+        <div class="service_icon"></div>
+        <h3>Custom Itineraries</h3>
+        <p>Plan the perfect day with our curated itineraries based on your interests, budget, and time frame.</p>
+      </div>
+
     </div>
- 
-  </div>
-</div>
 
-<!-- =========================================
-     The Modal Structure (Place near bottom of body)
-========================================== -->
-<div id="spotModal" class="modal-overlay">
-  <div class="modal-content">
-    <span class="close-modal">&times;</span>
-    <img id="modal-img" src="" alt="Spot Image">
-    <h2 id="modal-title">Title</h2>
-    <p id="modal-desc">Description goes here.</p>
-  </div>
-</div>
+    <div class="services_actions">
+      <a href="sidebar.html" class="btn btn_outline">Learn More</a>
+      <a href="contact.html" class="btn btn_arrow">
+        Sign Up <span class="arrow_icon">&#8594;</span>
+      </a>
+    </div>
+  </section>
 
-    <a href="sidebar.html" class="Learnmore">Learn More</a>
 
-  </main>
+  
 
-    <!-- Call to Action -->
-    <section class="spot-section cta-section">
-      <h2>Join the Community</h2>
-      <p>Share your favorite Intramuros spot or leave a review to help fellow explorers.</p>
-      <a href="contact.html" class="btn btn-secondary">Submit a Review</a>
-    </section>
 
-  <footer>
+  <section class="cta">
+    <span class="cta_label">CONNECT</span>
+    <h2 class="cta_title">Join the Community</h2>
+    <p class="cta_text">Share your favourite Intramuros spot or leave a review to help fellow explorers.</p>
+    <a href="contact.html" class="btn btn_solid">Submit a Review</a>
+  </section>
+
+  <footer class="footer">
     <p>&copy; 2025 IntraSpots. All rights reserved.</p>
   </footer>
+
   <script src="barScript.js"></script>
   <script src="script.js"></script>
   <script src="votes.js"></script>
   <script src="Chatbot.js" type="module"></script>
+  <script src="home.js"></script>
 </body>
 
 <script type="module">

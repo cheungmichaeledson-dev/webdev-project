@@ -1,61 +1,443 @@
-<input type="checkbox" id="sidebarC" />
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IntraSpots</title>
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;600&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-<aside class="sidebar">
-  <h2>IntraSpots</h2>
-  <nav>
-    <a
-      href="casa-manila.html"
-      class="sidebar-link"
-      style="--bg: url('images/casa-manila-hero.jpg');"
-    >
-      <span>Casa Manila</span>
-    </a>
-    <a
-      href="san-agustin-church.html"
-      class="sidebar-link"
-      style="--bg: url('images/san-agustin-hero.jpg');"
-    >
-      <span>San Agustin Church</span>
-    </a>
-    <a
-      href="papa-kape-fort-santiago.html"
-      class="sidebar-link"
-      style="--bg: url('images/papa-kape-hero.jpg');"
-    >
-      <span>Papa Kape</span>
-    </a>
-    <a
-      href="destileria-limtuaco-museum.html"
-      class="sidebar-link"
-      style="--bg: url('images/destileria-limtuaco0-museum-hero.jpg');"
-    >
-      <span>Destileria Limtuaco</span>
-    </a>
-    <a
-      href="la-cathedral-cafe.html"
-      class="sidebar-link"
-      style="--bg: url('images/la-cathedral-hero.jpg');"
-    >
-      <span>La Cathedral Cafe</span>
-    </a>
-    <a
-      href="bahay-tsinoy.html"
-      class="sidebar-link"
-      style="--bg: url('images/bahay-tsinoy-hero.PNG');"
-    >
-      <span>Bahay Tsinoy</span>
-    </a>
-    <a
-      href="paper-plus-cup.html"
-      class="sidebar-link"
-      style="--bg: url('images/paper-plus-cup-hero.PNG');"
-    >
-      <span>Paper + Cup</span>
-    </a>
-    
-  </nav>
-</aside>
+    html { scroll-behavior: smooth; }
 
+    body {
+      background-color: #ffffff;
+      background-image: none;
+      min-height: 100vh;
+      color: #1a1a1a;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 24px 80px;
+      overflow-x: hidden;
+    }
 
+    .page_header {
+      width: 100%;
+      max-width: 960px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 72px 0 56px;
+      position: relative;
+    }
 
-  <label for="sidebarC" class="overlay"></label>
+    .eyebrow {
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      color: #7a6a55;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3.2rem, 8vw, 6rem);
+      font-weight: 300;
+      font-style: italic;
+      color: #1a1a1a;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-align: center;
+      position: relative;
+    }
+
+    h1 em {
+      font-style: normal;
+      color: #e8b84b;
+    }
+
+    .rule {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 28px 0 20px;
+      width: 100%;
+      max-width: 340px;
+    }
+
+    .rule::before,
+    .rule::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #5a8a6a);
+    }
+    .rule::after {
+      background: linear-gradient(to left, transparent, #5a8a6a);
+    }
+
+    .rule-diamond {
+      width: 6px;
+      height: 6px;
+      background: #e8b84b;
+      transform: rotate(45deg);
+      flex-shrink: 0;
+    }
+
+    .subtitle {
+      font-family: 'IM Fell English', Georgia, serif;
+      font-style: italic;
+      font-size: 1rem;
+      color: #7a6a55;
+      letter-spacing: 0.04em;
+      text-align: center;
+    }
+
+    .spots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    /* last item if odd count: center it */
+    .spots-grid > :last-child:nth-child(odd) {
+      grid-column: 2 / 3;
+    }
+
+    .spot-card {
+      position: relative;
+      display: block;
+      height: 260px;
+      text-decoration: none;
+      overflow: hidden;
+      background: #0d2318;
+      cursor: pointer;
+    }
+
+    /* photograph layer */
+    .spot-card__photo {
+      position: absolute;
+      inset: 0;
+      background-image: var(--bg);
+      background-size: cover;
+      background-position: center;
+      opacity: 0.22;
+      transform: scale(1.06);
+      transition:
+        opacity   0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+      filter: sepia(20%) saturate(1.15) contrast(1.05);
+    }
+
+    .spot-card__vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(8,25,14,0.60) 0%, rgba(8,25,14,0.15) 40%, rgba(4,14,8,0.78) 100%),
+        radial-gradient(ellipse at center, transparent 40%, rgba(4,14,8,0.55) 100%);
+      transition: opacity 0.5s ease;
+    }
+
+    .spot-card__glow {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .spot-card__content {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 28px 24px;
+      z-index: 3;
+    }
+
+    .spot-card__num {
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.65rem;
+      font-weight: 300;
+      letter-spacing: 0.3em;
+      color: #7a6a55;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.4s ease 0.05s, transform 0.4s ease 0.05s;
+    }
+
+    .spot-card__name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      font-style: italic;
+      color: rgba(245,239,227,0.72);
+      letter-spacing: 0.06em;
+      text-align: center;
+      line-height: 1.2;
+      transition: color 0.4s ease, font-size 0.4s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    .spot-card__line {
+      width: 0;
+      height: 1px;
+      background: #e8b84b;
+      margin-top: 12px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .spot-card__cta {
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      color: #e8b84b;
+      margin-top: 10px;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s;
+    }
+
+    /* border treatment */
+    .spot-card::before {
+      content: '';
+      position: absolute;
+      inset: 1px;
+      border: 1px solid rgba(224,112,72,0.0);
+      z-index: 4;
+      transition: border-color 0.4s ease;
+      pointer-events: none;
+    }
+
+    /* corner ornaments */
+    .spot-card::after {
+      content: '';
+      position: absolute;
+      top: 10px; left: 10px;
+      right: 10px; bottom: 10px;
+      border-top: 1px solid transparent;
+      border-left: 1px solid transparent;
+      z-index: 4;
+      transition: border-color 0.4s ease 0.1s;
+      pointer-events: none;
+    }
+
+    .spot-card:hover .spot-card__photo {
+      opacity: 0.7;
+      transform: scale(1);
+    }
+
+    .spot-card:hover .spot-card__glow {
+      opacity: 1;
+    }
+
+    .spot-card:hover .spot-card__name {
+      color: #1a1a1a;
+      font-size: 1.5rem;
+    }
+
+    .spot-card:hover .spot-card__line {
+      width: 48px;
+    }
+
+    .spot-card:hover .spot-card__num {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .spot-card:hover .spot-card__cta {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .spot-card:hover::before {
+      border-color: rgba(224,112,72,0.45);
+    }
+
+    .spot-card:hover::after {
+      border-color: rgba(224,112,72,0.22);
+    }
+
+    .spot-card:focus-visible {
+      outline: 2px solid #e8b84b;
+      outline-offset: 3px;
+    }
+
+    footer {
+      margin-top: 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    footer .rule { max-width: 200px; margin: 0; }
+
+    .footer-text {
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: #7a6a55;
+    }
+
+    @media (max-width: 680px) {
+      .spots-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .spots-grid > :last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+      }
+      .spot-card {
+        height: 200px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .spots-grid {
+        grid-template-columns: 1fr;
+      }
+      .spots-grid > :last-child:nth-child(odd) {
+        grid-column: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { transition-duration: 0.001ms !important; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .page_header { animation: fadeUp 0.9s ease both; }
+
+    .spot-card {
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+
+    .spot-card:nth-child(1) { animation-delay: 0.15s; }
+    .spot-card:nth-child(2) { animation-delay: 0.25s; }
+    .spot-card:nth-child(3) { animation-delay: 0.35s; }
+    .spot-card:nth-child(4) { animation-delay: 0.42s; }
+    .spot-card:nth-child(5) { animation-delay: 0.49s; }
+    .spot-card:nth-child(6) { animation-delay: 0.56s; }
+    .spot-card:nth-child(7) { animation-delay: 0.63s; }
+  </style>
+</head>
+<body>
+   <div id="header-placeholder"></div>
+  <header class="page_header">
+    <p class="eyebrow">Intramuros, Manila Â· Heritage Guide</p>
+    <h1>Intra<em>Spots</em></h1>
+    <div class="rule"><div class="rule-diamond"></div></div>
+    <p class="subtitle">Walled city, living memory</p>
+  </header>
+
+  <main class="spots-grid">
+
+    <a href="casa-manila.html" class="spot-card" style="--bg: url('images/casa-manila-hero.jpg');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">01</span>
+        <span class="spot-card__name">Casa Manila</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+    <a href="san-agustin-church.html" class="spot-card" style="--bg: url('images/san-agustin-hero.jpg');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">02</span>
+        <span class="spot-card__name">San AgustÃ­n Church</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+    <a href="papa-kape-fort-santiago.html" class="spot-card" style="--bg: url('images/papa-kape-hero.jpg');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">03</span>
+        <span class="spot-card__name">Papa Kape</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+    <a href="destileria-limtuaco-museum.html" class="spot-card" style="--bg: url('images/destileria-limtuaco0-museum-hero.jpg');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">04</span>
+        <span class="spot-card__name">Destileria Limtuaco</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+    <a href="la-cathedral-cafe.html" class="spot-card" style="--bg: url('images/la-cathedral-hero.jpg');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">05</span>
+        <span class="spot-card__name">La Cathedral CafÃ©</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+    <a href="bahay-tsinoy.html" class="spot-card" style="--bg: url('images/bahay-tsinoy-hero.PNG');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">06</span>
+        <span class="spot-card__name">Bahay Tsinoy</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+    <a href="paper-plus-cup.html" class="spot-card" style="--bg: url('images/paper-plus-cup-hero.PNG');">
+      <div class="spot-card__photo"></div>
+      <div class="spot-card__vignette"></div>
+      <div class="spot-card__glow"></div>
+      <div class="spot-card__content">
+        <span class="spot-card__num">07</span>
+        <span class="spot-card__name">Paper + Cup</span>
+        <div class="spot-card__line"></div>
+        <span class="spot-card__cta">Explore</span>
+      </div>
+    </a>
+
+  </main>
+
+  <footer>
+    <div class="rule"><div class="rule-diamond"></div></div>
+    <p class="footer-text">Est. 1571 Â· Within the Walls</p>
+  </footer>
+
+  <script src="barScript.js"></script>
+</body>
+</html>

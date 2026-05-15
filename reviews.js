@@ -1,4 +1,4 @@
-// ---------- reviews.js ----------
+﻿
 document.addEventListener('DOMContentLoaded', () => {
   const reviewForm = document.getElementById('reviewForm');
   const container  = document.getElementById('reviewsList');
@@ -6,8 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const REVIEWS_URL = 'https://script.google.com/macros/s/AKfycbwZmJ81JcNUgRNvAS0-0U1dcWypSaVN6z4Hwz8typQZq2Tdxymim_bkJFlCeb16894O/exec';
 
   if (!reviewForm || !container) return;
-    
-  // 🔍 Get the place name from hidden input
+
   const placeInput = reviewForm.querySelector('input[name="place"]');
   const place = placeInput ? placeInput.value : '';
 
@@ -16,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
     p.textContent = str;
     return p.innerHTML;
   };
-  console.log('📍 Place is:', place);
+  console.log('ðŸ“ Place is:', place);
 
   async function loadReviews() {
     try {
@@ -31,16 +30,14 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // ⭐ Compute average rating
       const sum = data.reduce((total, r) => total + parseInt(r.rating || 0), 0);
       const avg = (sum / data.length).toFixed(1);
-      const stars = '★'.repeat(Math.round(avg)) + '☆'.repeat(5 - Math.round(avg));
+      const stars = 'â˜…'.repeat(Math.round(avg)) + 'â˜†'.repeat(5 - Math.round(avg));
 
       if (averageEl) {
         averageEl.innerHTML = `<strong>${avg}</strong> out of 5 ${stars}`;
       }
 
-      // 📝 Render each review
       data.forEach((r, i) => {
         const name = r.name || 'Anonymous';
         const rating = parseInt(r.rating, 10) || 0;
@@ -51,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const header = document.createElement('p');
         header.innerHTML = `<strong>${escapeHTML(name)}</strong> ${
-          '★'.repeat(rating) + '☆'.repeat(5 - rating)
+          'â˜…'.repeat(rating) + 'â˜†'.repeat(5 - rating)
         }`;
         card.appendChild(header);
 
@@ -89,6 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 🔁 Load reviews on page load
   loadReviews();
 });
+

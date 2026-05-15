@@ -1,13 +1,12 @@
+﻿
 
-// ---------- contact.js ----------
-// Load only on contact.html
 document.addEventListener('DOMContentLoaded', () => {
   const contactForm = document.getElementById('contactForm');
   if (!contactForm) return;
 
   contactForm.addEventListener('submit', async e => {
     e.preventDefault();
-    // Validation omitted for brevity; assume done here
+
     const formData = new FormData(contactForm);
     try {
       const res = await fetch('https://script.google.com/macros/s/AKfycbxZYNV7aDAAuq4rZF7imSwkfcJz27KEEGF3DKLEbyMAAnUqoYxUnybmpFuPIWjyNdF85Q/exec', { method: 'POST', body: formData });
@@ -24,4 +23,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
 

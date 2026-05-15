@@ -1,6 +1,147 @@
+﻿
+
+(function () {
+  'use strict';
+
+  
+  function initScrollReveal() {
+    const els = document.querySelectorAll('.reveal');
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in_view');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    els.forEach(function (el) { observer.observe(el); });
+  }
+
+  
+  function initModal() {
+    const modal      = document.getElementById('spotModal');
+    const modalImg   = document.getElementById('modal-img');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc  = document.getElementById('modal-desc');
+    const closeBtn   = document.querySelector('.close_modal');
+
+    if (!modal) return;
+
+    document.querySelectorAll('.carousel_item').forEach(function (card) {
+      card.addEventListener('click', function () {
+        modalImg.src       = card.dataset.img   || '';
+        modalImg.alt       = card.dataset.title || '';
+        modalTitle.textContent = card.dataset.title || '';
+        modalDesc.textContent  = card.dataset.desc  || '';
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    closeBtn && closeBtn.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', function (e) {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    function closeModal() {
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+  }
+
+  
+  function initHorizontalScroll() {
+    const strip   = document.querySelector('.horizontal_strip');
+    const pinWrap = document.querySelector('.horizontal_wrap');
+    if (!strip || !pinWrap) return;
+
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      pinWrap.style.transform = '';
+      return;
+    }
+
+    requestAnimationFrame(function () {
+      let currentScroll = 0;
+      let interval = null;
+      let maxScroll = 0;
+
+      function updateMaxScroll() {
+        maxScroll = Math.max(0, pinWrap.scrollWidth - strip.offsetWidth);
+        if (currentScroll > maxScroll) currentScroll = maxScroll;
+        pinWrap.style.transform = 'translateX(' + (-currentScroll) + 'px)';
+      }
+
+      function scrollBy(direction) {
+        const speed = 12;
+        if (direction === 'right' && currentScroll < maxScroll) {
+          currentScroll = Math.min(currentScroll + speed, maxScroll);
+        } else if (direction === 'left' && currentScroll > 0) {
+          currentScroll = Math.max(currentScroll - speed, 0);
+        }
+        pinWrap.style.transform = 'translateX(' + (-currentScroll) + 'px)';
+      }
+
+      function makeZone(side) {
+        const zone = document.createElement('div');
+        zone.className = 'hover_zone ' + side + '_zone';
+        zone.addEventListener('mouseenter', function () {
+          interval = setInterval(function () { scrollBy(side); }, 16);
+        });
+        zone.addEventListener('mouseleave', function () {
+          clearInterval(interval);
+          interval = null;
+        });
+        return zone;
+      }
+
+      strip.style.position = 'relative';
+      strip.appendChild(makeZone('left'));
+      strip.appendChild(makeZone('right'));
+
+      updateMaxScroll();
+
+      const images = pinWrap.querySelectorAll('img');
+      images.forEach(function (img) {
+        if (img.complete) {
+          updateMaxScroll();
+        } else {
+          img.addEventListener('load', updateMaxScroll, { once: true });
+        }
+      });
+
+      window.addEventListener('resize', updateMaxScroll);
+    });
+  }
+
+  
+  function init() {
+    initScrollReveal();
+    initModal();
+    initHorizontalScroll();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+
 function scrollTeam(direction) {
       const carousel = document.getElementById('teamCarousel');
-      // Dynamically calculate scroll amount based on card width + gap
+
       const cardWidth = carousel.querySelector('.team-card').offsetWidth;
       const gap = 32; // 2rem gap
       const scrollAmount = cardWidth + gap;
@@ -11,7 +152,6 @@ function scrollTeam(direction) {
       });
     }
 
-    // --- Scroll Animations (Intersection Observer) ---
     document.addEventListener('DOMContentLoaded', () => {
       const observerOptions = {
         root: null,
@@ -48,13 +188,12 @@ function revealOnScroll() {
     window.addEventListener('scroll', revealOnScroll);
     revealOnScroll(); // Trigger once on load
 
-    // --- 2. Carousel Controls ---
     const carousel = document.getElementById('servicesCarousel');
     const nextBtn = document.getElementById('nextBtn');
     const prevBtn = document.getElementById('prevBtn');
 
     function scrollCarousel(direction) {
-      // Calculate width of one card + gap to snap perfectly
+
       const cardWidth = carousel.querySelector('.service-item').offsetWidth;
       const gap = 32; // 2rem gap from CSS
       const scrollAmount = cardWidth + gap;
@@ -68,11 +207,9 @@ function revealOnScroll() {
     nextBtn.addEventListener('click', () => scrollCarousel(1));
     prevBtn.addEventListener('click', () => scrollCarousel(-1));
 
-    // --- 3. Creative Parallax Floating Background Elements ---
     const shapesContainer = document.getElementById('shapesContainer');
     const shapes = [];
 
-    // Create random minimalist circles
     for(let i = 0; i < 8; i++) {
       const shape = document.createElement('div');
       shape.classList.add('shape');
@@ -86,27 +223,25 @@ function revealOnScroll() {
       shape.style.height = `${size}px`;
       shape.style.left = `${posX}%`;
       shape.style.top = `${posY}%`;
-      
-      // Store speed in data attribute for parallax calc
+
       shape.dataset.speed = speed;
       
       shapesContainer.appendChild(shape);
       shapes.push(shape);
     }
 
-    // Parallax logic for shapes based on scroll
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       shapes.forEach(shape => {
         const speed = parseFloat(shape.dataset.speed);
-        // Move element upward at different speeds relative to scroll
+
         const yPos = -(scrollY * speed);
         shape.style.transform = `translateY(${yPos}px)`;
       });
     });
     function scrollTeam(direction) {
       const carousel = document.getElementById('teamCarousel');
-      // Dynamically calculate scroll amount based on card width + gap
+
       const cardWidth = carousel.querySelector('.team-card').offsetWidth;
       const gap = 32; // 2rem gap
       const scrollAmount = cardWidth + gap;
@@ -140,7 +275,6 @@ function revealOnScroll() {
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 1) Paragraph fade-in
   const paras = document.querySelectorAll('.content p');
   if (paras.length) {
     setTimeout(() => {
@@ -148,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   }
 
-  // 2) Slideshow (mySlides + dots)
   const slides = document.querySelectorAll('.mySlides');
   const dots   = document.querySelectorAll('.dot');
   let slideIndex = 1;
@@ -166,7 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showSlides(slideIndex);
   }
 
-  // 4) Scroll reveal for key sections/cards
   const revealTargets = document.querySelectorAll(
     '.spot-card, .spot-section, .cta-section, .updates-section'
   );
@@ -175,7 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
+          entry.target.classList.add('in_view');
           observer.unobserve(entry.target);
         }
       });
@@ -183,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
     revealTargets.forEach(el => observer.observe(el));
   }
 
-  // 4b) Parallax background for designated sections
   const parallaxEls = document.querySelectorAll('[data-parallax]');
   if (parallaxEls.length && !prefersReducedMotion) {
     const onScroll = () => {
@@ -198,7 +329,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('scroll', onScroll, { passive: true });
   }
 
-  // 3) Team carousel (horizontal scroll)
   const carousel = document.querySelector('.team-carousel');
   const btnNext  = document.getElementById('teamNext');
   const btnPrev  = document.getElementById('teamPrev');
@@ -207,7 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardWidth = carousel.querySelector('.team-card').offsetWidth + gap;
     btnNext.addEventListener('click', () => carousel.scrollBy({ left: cardWidth, behavior: 'smooth' }));
     btnPrev.addEventListener('click', () => carousel.scrollBy({ left: -cardWidth, behavior: 'smooth' }));
-    // auto-rotate
+
     let autoRotate = setInterval(() => carousel.scrollBy({ left: cardWidth, behavior: 'smooth' }), 4000);
     carousel.addEventListener('mouseenter', () => clearInterval(autoRotate));
     carousel.addEventListener('mouseleave', () => {
@@ -215,8 +345,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 3b) Home coverflow carousel (click to advance)
-  const coverflow = document.querySelector('.carousel-container');
+  const coverflow = document.querySelector('.carousel_container');
   if (coverflow) {
     const radios = Array.from(coverflow.querySelectorAll('input[name="position"]'));
     const advance = () => {
@@ -228,13 +357,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     coverflow.addEventListener('click', event => {
       if (event.target instanceof HTMLInputElement) return;
+      if (event.target.closest('.carousel_item')) return;
       advance();
     });
   }
 
-
-
-  // 5) Reviews (same code as before, but only if #reviewForm exists)
   const reviewForm = document.getElementById('reviewForm');
   const reviewsContainer = document.getElementById('reviewsList');
   if (reviewForm && reviewsContainer) {
@@ -252,18 +379,18 @@ document.addEventListener('DOMContentLoaded', () => {
         reviewsContainer.textContent = 'Be the first to leave a review!';
         return;
       }
-      // average
+
       const sum = data.reduce((s, r) => s + parseInt(r.rating||0,10), 0);
       const avg = (sum/data.length).toFixed(1);
       if (avgEl) avgEl.innerHTML = `<strong>${avg}</strong> out of 5 ` +
-        '★'.repeat(Math.round(avg)) + '☆'.repeat(5-Math.round(avg));
+        'â˜…'.repeat(Math.round(avg)) + 'â˜†'.repeat(5-Math.round(avg));
 
       data.forEach(r => {
         const card = document.createElement('div');
         card.className = 'review';
         card.innerHTML = `
           <p><strong>${escapeHTML(r.name)}</strong> ${
-            '★'.repeat(+r.rating) + '☆'.repeat(5-(+r.rating))
+            'â˜…'.repeat(+r.rating) + 'â˜†'.repeat(5-(+r.rating))
           }</p>
           <p>${escapeHTML(r.review)}</p>
         `;
@@ -292,49 +419,40 @@ document.addEventListener('DOMContentLoaded', () => {
     loadReviews();
   }
 
-
-
-  // 7) Auto-activate nav link
   document.querySelectorAll('.topbar nav a').forEach(a => {
     if (a.href === window.location.href) a.classList.add('active');
   });
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Grab the modal and its internal elements
+
   const modal = document.getElementById("spotModal");
-  const closeBtn = document.querySelector(".close-modal");
+  const closeBtn = document.querySelector(".close_modal");
   const modalImg = document.getElementById("modal-img");
   const modalTitle = document.getElementById("modal-title");
   const modalDesc = document.getElementById("modal-desc");
 
-  // 2. Grab all carousel cards
-  const carouselItems = document.querySelectorAll(".carousel-item");
+  const carouselItems = document.querySelectorAll(".carousel_item");
 
-  // 3. Listen for clicks on every card
   carouselItems.forEach(item => {
     item.addEventListener("click", function() {
-      // Get the data attributes from the specific card you clicked
+
       const title = this.getAttribute("data-title");
       const desc = this.getAttribute("data-desc");
       const imgsrc = this.getAttribute("data-img");
 
-      // Inject that text/image into the hidden modal
       modalTitle.textContent = title;
       modalDesc.textContent = desc;
       modalImg.src = imgsrc;
 
-      // Reveal the modal
       modal.classList.add("show");
     });
   });
 
-  // 4. Close the modal when clicking the 'X'
   closeBtn.addEventListener("click", () => {
     modal.classList.remove("show");
   });
 
-  // 5. Close the modal when clicking outside the white box (on the dark background)
   window.addEventListener("click", (event) => {
     if (event.target === modal) {
       modal.classList.remove("show");

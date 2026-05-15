@@ -1,4 +1,4 @@
-* {
+﻿* {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
@@ -17,7 +17,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* ===== Animations ===== */
+    
     .fade-in {
       opacity: 0;
       transform: translateY(30px);
@@ -29,12 +29,12 @@
       transform: translateY(0);
     }
 
-    /* ===== Hero Section ===== */
+    
     .about-hero {
       height: 75vh;
       background-size: cover;
       background-position: center;
-      background-attachment: fixed; /* Parallax effect */
+      background-attachment: fixed; 
       position: relative;
     }
 
@@ -86,7 +86,7 @@
       to { opacity: 1; }
     }
 
-    /* ===== Main Layout ===== */
+    
     main {
       max-width: 1200px;
       margin: auto;
@@ -114,7 +114,7 @@
       border-radius: 2px;
     }
 
-    /* ===== Two Column Sections (Mission & Vision) ===== */
+    
     .grid-two {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -146,7 +146,7 @@
       font-size: 1.1rem;
     }
 
-    /* ===== Team Section ===== */
+    
     .team-section {
       text-align: center;
     }
@@ -157,11 +157,11 @@
       scroll-behavior: smooth;
       padding: 1rem 0 2rem 0;
       gap: 2rem;
-      scrollbar-width: none; /* Firefox */
+      scrollbar-width: none; 
     }
 
     .team-carousel::-webkit-scrollbar {
-      display: none; /* Chrome/Safari */
+      display: none; 
     }
 
     .team-card {
@@ -238,7 +238,7 @@
       transform: scale(1.1);
     }
 
-    /* ===== Timeline ===== */
+    
     .timeline {
       list-style: none;
       max-width: 800px;
@@ -261,7 +261,7 @@
     .timeline li::before {
       content: "";
       position: absolute;
-      left: -53px; /* Centers dot on the border */
+      left: -53px; 
       top: 0;
       width: 16px;
       height: 16px;
@@ -290,7 +290,7 @@
       font-size: 1.1rem;
     }
 
-    /* ===== Footer ===== */
+    
     footer {
       background: #000000;
       color: #fff;
@@ -303,7 +303,7 @@
       font-size: 0.95rem;
     }
 
-    /* ===== Responsive ===== */
+    
     @media (max-width: 768px) {
       .hero-overlay h1 {
         font-size: 2.5rem;

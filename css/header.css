@@ -1,0 +1,103 @@
+﻿#topbarC {
+  display: none;
+}
+
+.topbarWrapper {
+  background: black;
+  overflow: hidden;
+  max-height: 60px;
+  transition: max-height 0.4s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+#topbarC:checked ~ .topbarWrapper {
+  max-height: 0;
+}
+
+#topbarC:checked ~ .topbarWrapper .topbar {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.topbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #ffffff;
+  padding: 0 20px;
+}
+
+.topbar nav {
+  display: flex;
+  gap: 1rem;
+  color: #ffffff;
+}
+
+.topbar nav a {
+  color: #ffffff;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 10px;
+  font-weight: 500;
+  transition: color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+}
+
+.topbar nav a.active {
+  color: var(--accent-strong, #000000);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-bottom: 2px solid var(--accent-strong, #000000);
+  border-radius: 0;
+}
+
+.topbar nav a:hover {
+  color: rgb(208, 255, 0);
+}
+
+.topbarToggler {
+  width: 400px;
+  margin-right: 400px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  background: transparent;
+  color: var(--text, #111111);
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  z-index: 1001;
+  border-radius: 4px;
+  transition: background 0.3s ease;
+  opacity: 0;
+}
+
+.topbarWrapper:hover .topbarToggler {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.topbarToggler::before {
+  content: "âœ–";
+}
+
+
+
+.sidebarToggle {
+  font-size: 24px;
+  cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+
+#sidebarC:checked + .topbarWrapper .topbar .sidebarToggle::before {
+  content: "âœ–";
+  transform: rotate(180deg);
+}
+

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -7,14 +7,14 @@
   <meta name="description" content="Discover Casa Manila: a restored Spanish colonial house museum in Intramuros, with history, galleries, and photo-worthy corners.">
   <title>IntraSpots | Casa Manila</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/sidebar.css">
   <link rel="stylesheet" href="css/spots.css">
 </head>
 <body>
  <div id="header-placeholder"></div>
- <div id="sidebar-placeholder"></div>
 
-  <!-- Hero -->
+  
   <section class="hero" style="background-image:url('images/casa-manila-hero.jpg');">
     <div class="hero-content">
       <h1>Casa Manila</h1>
@@ -22,15 +22,15 @@
     </div>
   </section>
 
-  <!-- Main Content -->
+  
   <main class="content">
-    <!-- Overview -->
+    
     <section class="spot-section">
       <h2>Overview</h2>
       <p>Casa Manila is a reconstructed colonial house museum showcasing period furniture, intricate woodwork, and themed rooms that transport you to Spanish-era Philippines. Located in the heart of Intramuros, it offers a glimpse into 19th century domestic life.</p>
     </section>
 
-    <!-- Image Gallery -->
+    
 <section class="spot-section gallery-section">
   <h2>Photo Gallery</h2>
   <div class="grid-three">
@@ -43,7 +43,7 @@
 </section>
 
 
-    <!-- Key Features -->
+    
     <section class="spot-section">
       <h2>Key Features</h2>
       <ul>
@@ -54,7 +54,7 @@
       </ul>
     </section>
 
-    <!-- Interactive Map -->
+    
     <section class="spot-section">
       <h2>Find It Here</h2>
       <div class="map-container">
@@ -62,27 +62,27 @@
       </div>
     </section>
 
-    <!-- User Reviews -->
+    
     <section class="spot-section reviews-section">
     <h2>User Reviews</h2>
 
 
     <p id="averageRating" class="average-stars">Loading average rating...</p>
 
-    <!-- Review List Container -->
+    
     <div id="reviewsList"></div>
 
-    <!-- New Review Form -->
+    
     <form id="reviewForm" class="review-form">
         <input type="hidden" name="place" value="Casa Manila">
         <input type="text" name="name"    placeholder="Your name" required>
         <select name="rating" required>
         <option value="">Rating</option>
-        <option value="5">★★★★★</option>
-        <option value="4">★★★★☆</option>
-        <option value="3">★★★☆☆</option>
-        <option value="2">★★☆☆☆</option>
-        <option value="1">★☆☆☆☆</option>
+        <option value="5">â˜…â˜…â˜…â˜…â˜…</option>
+        <option value="4">â˜…â˜…â˜…â˜…â˜†</option>
+        <option value="3">â˜…â˜…â˜…â˜†â˜†</option>
+        <option value="2">â˜…â˜…â˜†â˜†â˜†</option>
+        <option value="1">â˜…â˜†â˜†â˜†â˜†</option>
         </select>
         <textarea name="review" rows="3" placeholder="Your review..." required></textarea>
         <button type="submit" class="btn btn-primary">Submit Review</button>
@@ -103,3 +103,4 @@
   <img id="lightbox-img" src="" alt="">
 </div>
 </html>
+
