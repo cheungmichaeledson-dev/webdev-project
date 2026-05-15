@@ -31,6 +31,7 @@
       font-family: var(--font-body);
       font-weight: 300;
       overflow-x: hidden;
+      width: 100%;
     }
 
     /* ── HERO BANNER ── */
@@ -42,6 +43,7 @@
       align-items: flex-end;
       padding: 4rem;
       overflow: hidden;
+      width: 100%;
     }
 
     .community-hero video {
@@ -119,7 +121,7 @@
       max-width: 480px;
     }
 
-    /* ── STATS BAR ── */
+    /* ── STATS BAR (FIXED WIDTH) ── */
     .stats-bar {
       background: var(--dark-2);
       border-top: 1px solid var(--border);
@@ -128,8 +130,7 @@
       display: flex;
       gap: 3rem;
       align-items: center;
-      width: 100vw;
-      margin: 0;
+      width: 100%; /* Changed from 100vw to fix page stretching */
       box-sizing: border-box;
     }
 
@@ -159,15 +160,21 @@
       background: var(--border);
     }
 
-    /* ── MAIN LAYOUT ── */
+    /* ── MAIN LAYOUT (FIXED GRID) ── */
     .community-main {
-      width: 100vw;
-      margin: 0;
-      padding: 3.5rem 1.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
       display: grid;
-      grid-template-columns: 1fr 320px;
+      /* minmax(0, 1fr) is critical to force the carousel to scroll instead of pushing the sidebar */
+      grid-template-columns: minmax(0, 1fr) 320px; 
       gap: 2.5rem;
+      width: 100%;
       box-sizing: border-box;
+    }
+
+    .left-col {
+      min-width: 0; /* Prevents column blowout */
     }
 
     /* ── SECTION HEADERS ── */
@@ -203,10 +210,11 @@
 
     .section-link:hover { border-color: var(--gold); }
 
-    /* ── SPOT CAROUSEL ── */
+    /* ── SPOT CAROUSEL (CLEAN SCROLLING) ── */
     .spot-carousel {
       position: relative;
       margin-bottom: 4rem;
+      width: 100%;
     }
 
     .carousel-track {
@@ -215,13 +223,14 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
-      padding-bottom: 1rem;
+      padding-bottom: 1.5rem;
+      width: 100%;
     }
 
     .carousel-track::-webkit-scrollbar { display: none; }
 
     .spot-card {
-      flex: 0 0 140px;
+      flex: 0 0 280px; /* Consistent card width */
       scroll-snap-align: start;
       background: var(--dark-2);
       border: 1px solid var(--border);
@@ -229,6 +238,7 @@
       overflow: hidden;
       transition: transform 0.3s ease, border-color 0.3s ease;
       cursor: pointer;
+      max-width: 85vw; 
     }
 
     .spot-card:hover {
@@ -359,6 +369,7 @@
     /* ── VIDEO SECTION ── */
     .video-section {
       margin-bottom: 4rem;
+      width: 100%;
     }
 
     .video-wrapper {
@@ -368,6 +379,7 @@
       border: 1px solid var(--border);
       background: var(--dark-3);
       aspect-ratio: 16/9;
+      width: 100%;
     }
 
     .video-wrapper video {
@@ -375,48 +387,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .video-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      background: linear-gradient(135deg, var(--dark-3), #1a1209);
-      min-height: 300px;
-    }
-
-    .video-placeholder .play-btn {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: var(--gold);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
-
-    .video-placeholder .play-btn:hover {
-      transform: scale(1.1);
-      background: var(--gold-light);
-    }
-
-    .video-placeholder .play-btn svg {
-      width: 28px;
-      height: 28px;
-      fill: var(--dark);
-      margin-left: 4px;
-    }
-
-    .video-placeholder p {
-      color: var(--cream-muted);
-      font-size: 14px;
-      letter-spacing: 1px;
     }
 
     /* ── COMMUNITY FEED ── */
@@ -627,7 +597,7 @@
     .btn-submit:active { transform: scale(0.98); }
 
     /* ── SIDEBAR ── */
-    .sidebar { position: relative; }
+    .sidebar { width: 320px; }
 
     .sidebar-card {
       background: var(--dark-2);
@@ -834,12 +804,6 @@
       <div class="video-wrapper">
         <video controls poster="images/intramuros-hero.jpg">
           <source src="images/intramuros-video.mp4" type="video/mp4">
-          <div class="video-placeholder">
-            <div class="play-btn">
-              <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-            </div>
-            <p>Intramuros — A Walk Through History</p>
-          </div>
         </video>
       </div>
     </div>
@@ -888,56 +852,7 @@
       </div>
 
       <div id="reviewsFeed">
-        <?php
-          $reviews = $pdo->query("
-            SELECT r.*, u.username, s.name as spot_name
-            FROM reviews r
-            JOIN users u ON r.user_id = u.id
-            JOIN spots s ON r.spot_id = s.id
-            ORDER BY r.created_at DESC
-            LIMIT 20
-          ")->fetchAll();
-        ?>
-
-        <?php if(empty($reviews)): ?>
-          <div class="feed-post" id="emptyFeedMessage" style="text-align:center; color: var(--cream-muted); padding: 3rem;">
-            <p style="font-family: var(--font-display); font-size:1.5rem; margin-bottom:0.5rem;">No reviews yet</p>
-            <p style="font-size:13px;">Be the first to share your Intramuros experience!</p>
-          </div>
-        <?php else: ?>
-          <?php foreach($reviews as $review): ?>
-            <div class="feed-post" data-rating="<?= $review['rating'] ?>">
-              <div class="post-header">
-                <div class="avatar"><?= strtoupper(substr($review['username'], 0, 2)) ?></div>
-                <div class="post-meta">
-                  <p class="post-author"><?= htmlspecialchars($review['username']) ?></p>
-                  <p class="post-spot">@ <?= htmlspecialchars($review['spot_name']) ?></p>
-                </div>
-                <div>
-                  <div class="post-rating">
-                    <?php for($i=1; $i<=5; $i++): ?>
-                      <span class="star <?= $i <= $review['rating'] ? '' : 'empty' ?>">★</span>
-                    <?php endfor; ?>
-                  </div>
-                  <p class="post-time"><?= date('M d, Y', strtotime($review['created_at'])) ?></p>
-                </div>
-              </div>
-              <p class="post-comment"><?= htmlspecialchars($review['comment']) ?></p>
-              
-              <div class="post-actions">
-                <button type="button" class="vote-btn upvote" onclick="handleVote(<?= $review['spot_id'] ?>, 'up', this)">
-                  <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                  Helpful
-                </button>
-
-                <?php if($review['user_id'] == 1): ?>
-                  <button type="button" class="vote-btn" style="color: #E05555; border-color: #E05555;" onclick="deleteReview(<?= $review['id'] ?>, this)">Delete</button>
-                <?php endif; ?>
-              </div>
-            </div>
-          <?php endforeach; ?>
-        <?php endif; ?>
-      </div>
+        </div>
     </div>
 
   </div>
@@ -982,40 +897,17 @@
 
     <div class="sidebar-card">
       <h3>Recent Activity</h3>
-      <?php
-        $recent = $pdo->query("
-          SELECT r.comment, r.rating, u.username, s.name as spot_name, r.created_at
-          FROM reviews r
-          JOIN users u ON r.user_id = u.id
-          JOIN spots s ON r.spot_id = s.id
-          ORDER BY r.created_at DESC
-          LIMIT 4
-        ")->fetchAll();
-      ?>
-      <?php if(empty($recent)): ?>
-        <p style="font-size:13px; color:var(--cream-muted);">No activity yet.</p>
-      <?php else: ?>
-        <?php foreach($recent as $act): ?>
-          <div style="padding: 10px 0; border-bottom: 1px solid var(--border);">
-            <p style="font-size:12px; color:var(--cream); font-weight:500;"><?= htmlspecialchars($act['username']) ?> reviewed <span style="color:var(--gold)"><?= htmlspecialchars($act['spot_name']) ?></span></p>
-            <p style="font-size:11px; color:var(--cream-muted); margin-top:2px;"><?= date('M d', strtotime($act['created_at'])) ?></p>
-          </div>
-        <?php endforeach; ?>
-      <?php endif; ?>
-    </div>
+      </div>
 
   </aside>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script src="barScript.js"></script>
-<script src="script.js"></script>
-
 <script>
   function scrollCarousel(dir) {
     const track = document.getElementById('spotCarousel');
-    track.scrollBy({ left: dir * 320, behavior: 'smooth' });
+    track.scrollBy({ left: dir * 300, behavior: 'smooth' });
   }
 
   function selectSpot(id, name) {
@@ -1034,7 +926,6 @@
     stars.forEach((s, i) => s.classList.toggle('active', i < val));
   }
 
-  // --- AJAX UPVOTE ---
   function handleVote(spotId, type, btn) {
     fetch('api/vote.php', {
       method: 'POST',
@@ -1058,7 +949,6 @@
     });
   }
 
-  // --- AJAX SUBMIT REVIEW ---
   document.getElementById('reviewForm').addEventListener('submit', function(e) {
     e.preventDefault(); 
     const formData = new FormData(this); 
@@ -1068,9 +958,9 @@
       body: formData
     })
     .then(async res => {
-      const text = await res.text(); // Read the raw text first
+      const text = await res.text();
       try {
-        return JSON.parse(text); // Try to parse it
+        return JSON.parse(text);
       } catch(err) {
         console.error("Raw Server Response:", text);
         throw new Error("Server did not send valid JSON.");
@@ -1079,68 +969,20 @@
     .then(data => {
       if (data.success) {
         showToast(data.message);
-        
-        // Reset the form visually
         this.reset();
         setRating(0); 
-        document.getElementById('spotSelect').value = '';
-
-        // Format Date
-        const dateObj = new Date(data.review.created_at);
-        const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-        const avatarChars = data.review.username.substring(0, 2).toUpperCase();
-        
-        // Format Stars
-        let starsHtml = '';
-        for(let i = 1; i <= 5; i++) {
-          starsHtml += `<span class="star ${i <= data.review.rating ? '' : 'empty'}">★</span>`;
-        }
-
-        // Build the HTML
-        const newReviewHtml = `
-          <div class="feed-post" data-rating="${data.review.rating}">
-            <div class="post-header">
-              <div class="avatar">${avatarChars}</div>
-              <div class="post-meta">
-                <p class="post-author">${data.review.username}</p>
-                <p class="post-spot">@ ${data.review.spot_name}</p>
-              </div>
-              <div>
-                <div class="post-rating">${starsHtml}</div>
-                <p class="post-time">${formattedDate}</p>
-              </div>
-            </div>
-            <p class="post-comment">${data.review.comment}</p>
-            <div class="post-actions">
-              <button type="button" class="vote-btn upvote" onclick="handleVote(${data.review.spot_id}, 'up', this)">
-                <svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                Helpful
-              </button>
-              <button type="button" class="vote-btn" style="color: #E05555; border-color: #E05555;" onclick="deleteReview(${data.review.id}, this)">Delete</button>
-            </div>
-          </div>
-        `;
-
-        const feedContainer = document.getElementById('reviewsFeed');
-        const emptyMessage = document.getElementById('emptyFeedMessage');
-        if(emptyMessage) emptyMessage.remove();
-        
-        // Inject instantly
-        feedContainer.insertAdjacentHTML('afterbegin', newReviewHtml);
-
+        fetchLiveFeed(); // Refresh feed immediately
       } else {
         showToast(data.message);
       }
     })
     .catch(err => {
       console.error("Submit Error:", err);
-      showToast('Error connecting to server. Check console.');
+      showToast('Error connecting to server.');
     });
   });
 
-  // --- AJAX DELETE REVIEW ---
   function deleteReview(reviewId, btnElement) {
-    // If you hit "Cancel" on the popup, it stops here
     if(!confirm('Are you sure you want to delete this review?')) return;
 
     fetch('delete_review.php', {
@@ -1153,8 +995,7 @@
       try {
         return JSON.parse(text);
       } catch(err) {
-        console.error("Raw Server Response:", text);
-        throw new Error("Server did not send valid JSON.");
+        throw new Error("Invalid server response.");
       }
     })
     .then(data => {
@@ -1169,11 +1010,10 @@
     })
     .catch(err => {
       console.error("Delete Error:", err);
-      showToast('Error connecting to server. Check console.');
+      showToast('Error connecting to server.');
     });
   }
 
-  // --- UI FILTERS & TOASTS ---
   function filterFeed(val, btn) {
     document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
     btn.classList.add('active');
@@ -1186,47 +1026,30 @@
     });
   }
 
-  function filterByCategory(cat) {
-    showToast('Filtering by: ' + cat);
-  }
-
   function showToast(msg) {
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
-  // --- REAL-TIME LIVE FEED (HOT RELOAD) ---
-  
-  // 1. Function to build the HTML for the reviews
+
   function renderFeed(reviews) {
     const feedContainer = document.getElementById('reviewsFeed');
-    
     if (reviews.length === 0) {
-      feedContainer.innerHTML = `
-        <div class="feed-post" id="emptyFeedMessage" style="text-align:center; color: var(--cream-muted); padding: 3rem;">
-          <p style="font-family: var(--font-display); font-size:1.5rem; margin-bottom:0.5rem;">No reviews yet</p>
-          <p style="font-size:13px;">Be the first to share your Intramuros experience!</p>
-        </div>`;
+      feedContainer.innerHTML = `<div class="feed-post" style="text-align:center; color: var(--cream-muted); padding: 3rem;">No reviews yet</div>`;
       return;
     }
 
     let html = '';
-    
     reviews.forEach(review => {
-      // Format Date
       const dateObj = new Date(review.created_at);
       const formattedDate = dateObj.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       const avatarChars = review.username.substring(0, 2).toUpperCase();
-      
-      // Format Stars
       let starsHtml = '';
       for(let i = 1; i <= 5; i++) {
         starsHtml += `<span class="star ${i <= review.rating ? '' : 'empty'}">★</span>`;
       }
 
-      // Check if current user is user 1 (for the delete button)
-      // TEMPORARY BYPASS: We are assuming the current viewer is user 1
       const deleteBtn = (review.user_id == 1) 
         ? `<button type="button" class="vote-btn" style="color: #E05555; border-color: #E05555;" onclick="deleteReview(${review.id}, this)">Delete</button>` 
         : '';
@@ -1255,21 +1078,15 @@
         </div>
       `;
     });
-
-    // Update the container smoothly
     feedContainer.innerHTML = html;
   }
 
-  // 2. Function to fetch the data from our new API
   function fetchLiveFeed() {
     fetch('api/fetch_reviews.php')
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          // Update the feed
           renderFeed(data.reviews);
-          
-          // Update the Stats Bar!
           if(data.stats) {
             document.getElementById('stat-spots').innerText = data.stats.spots;
             document.getElementById('stat-reviews').innerText = data.stats.reviews;
@@ -1278,11 +1095,12 @@
           }
         }
       })
-      .catch(err => console.error("Live feed sync error:", err));
+      .catch(err => console.error("Sync error:", err));
   }
 
-  // 3. Start the Hot Reload loop! (Checks every 3 seconds)
   setInterval(fetchLiveFeed, 3000);
+  fetchLiveFeed(); // Initial load
 </script>
+ <script src="barScript.js"></script>
 </body>
 </html>
