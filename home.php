@@ -1,0 +1,134 @@
+<?php require 'includes/db.php'; ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="IntraSpots: Explore top hangout spots, hidden gems, and plan your perfect Intramuros adventure.">
+  <title>IntraSpots | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+ <div id="header-placeholder"></div>
+
+    <!-- Hero Section -->
+  <section class="hero parallax" data-parallax data-parallax-speed="0.25" style="background-image:url('images/intramuros-hero.jpg');">
+    <div class="hero-overlay">
+      <h1>Welcome to IntraSpots</h1>
+      <p>Your gateway to the best cafés, corners, and hidden treasures of Intramuros.</p>
+      <a href="#area-carousel" class="btn btn-primary">Discover Now</a>
+    </div>
+  </section>
+
+  
+  <main id="area-preview" class="content">
+    
+  <h2>Featured Areas</h2>
+  
+  <div class="carousel-container">
+  <input type="radio" name="position" checked />
+  <input type="radio" name="position" />
+  <input type="radio" name="position" />
+    <input type="radio" name="position" />
+      <input type="radio" name="position" />
+
+  <div id="area-carousel" class="carousel-stage">
+    
+    <!-- Added data-* attributes to store modal info -->
+    <div class="carousel-item" style="background-image: url('images/papa-kape-hero.jpg');"
+         data-title="Papa Kape"
+         data-desc="Rustic café set inside a 400-year-old cistern, serving bold kapeng barako and Filipino merienda."
+         data-img="images/papa-kape-hero.jpg">
+      <div class="carousel-caption">Papa Kape</div>
+    </div>
+    
+    <div class="carousel-item" style="background-image: url('images/destileria-limtuaco0-museum-1.jpg');"
+         data-title="Destileria Limtuaco"
+         data-desc="Step into the Philippines’ oldest distillery museum—see vintage equipment and sample artisanal spirits."
+         data-img="images/destileria-limtuaco0-museum-1.jpg">f
+      <div class="carousel-caption">Destileria Limtuaco</div>
+    </div>
+    
+    <div class="carousel-item" style="background-image: url('images/casa-manila.jpg');"
+         data-title="Casa Manila"
+         data-desc="Discover life in 19th-century Manila through exquisitely restored period rooms and decor."
+         data-img="images/casa-manila.jpg">
+      <div class="carousel-caption">Casa Manila</div>
+    </div>
+ 
+  </div>
+</div>
+
+<!-- =========================================
+     The Modal Structure (Place near bottom of body)
+========================================== -->
+<div id="spotModal" class="modal-overlay">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <img id="modal-img" src="" alt="Spot Image">
+    <h2 id="modal-title">Title</h2>
+    <p id="modal-desc">Description goes here.</p>
+  </div>
+</div>
+
+    <a href="sidebar.html" class="Learnmore">Learn More</a>
+
+  </main>
+
+    <!-- Call to Action -->
+    <section class="spot-section cta-section">
+      <h2>Join the Community</h2>
+      <p>Share your favorite Intramuros spot or leave a review to help fellow explorers.</p>
+      <a href="contact.html" class="btn btn-secondary">Submit a Review</a>
+    </section>
+
+  <footer>
+    <p>&copy; 2025 IntraSpots. All rights reserved.</p>
+  </footer>
+  <script src="barScript.js"></script>
+  <script src="script.js"></script>
+  <script src="votes.js"></script>
+  <script src="Chatbot.js" type="module"></script>
+</body>
+
+<script type="module">
+  import Chatbox from 'https://cdn.jsdelivr.net/npm/@chaindesk/embeds@latest/dist/chatbox/index.js';
+
+  const widget = await Chatbox.initBubble({
+    agentId: 'cmojwi1gn0mwyy9nevmd09etl',
+    
+    // optional 
+    // If provided will create a contact for the user and link it to the conversation
+    contact: {
+      firstName: 'Allan',
+      lastName: 'Andrew',
+      email: 'AllanEdsonAndrewPadua@email.com',
+      phoneNumber: '+09151515',
+      userId: '42424242',
+    },
+    // optional
+    // Override initial messages
+    initialMessages: [
+      'Hello Allan how are you doing today?',
+      'How can I help you ?',
+    ],
+    // optional
+    // Provided context will be appended to the Agent system prompt
+    context: "The user you are talking to is Gaymax. Start by Greeting him by his name.",
+  });
+
+  // open the chat bubble
+  widget.open();
+
+  // close the chat bubble
+  widget.close()
+
+  // or 
+  widget.toggle()
+</script>
+
+</html>
