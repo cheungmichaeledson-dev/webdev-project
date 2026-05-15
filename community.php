@@ -1,4 +1,4 @@
-<?php require 'includes/db.php'; ?>
+<?php require 'includes/db.php'; require 'tracker.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -720,7 +720,7 @@
   $totalSpots = $pdo->query("SELECT COUNT(*) FROM spots")->fetchColumn();
   $totalReviews = $pdo->query("SELECT COUNT(*) FROM reviews")->fetchColumn();
   $totalVotes = $pdo->query("SELECT COUNT(*) FROM votes")->fetchColumn();
-  $totalUsers = $pdo->query("SELECT COUNT(*) FROM users")->fetchColumn();
+  $totalVisits = $pdo->query("SELECT COUNT(*) FROM page_visits")->fetchColumn();
 ?>
 <div class="stats-bar">
   <div class="stat-item">
@@ -739,7 +739,7 @@
   </div>
   <div class="stat-divider"></div>
   <div class="stat-item">
-    <span class="stat-num" id="stat-users"><?= $totalUsers ?></span>
+    <span class="stat-num" id="stat-users"><?= number_format($totalVisits) ?></span>
     <span class="stat-label">Explorers</span>
   </div>
 </div>
