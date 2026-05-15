@@ -33,7 +33,7 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 150vh;
   padding-top: 20px;
   padding-left: 20px;
   padding-right: 20px;
@@ -190,6 +190,7 @@ button:focus-visible {
 .contact-form {
   width: 100%;
   margin-top: 2rem;
+  width: 500px;
 }
 
 .form-grid {

@@ -543,4 +543,9 @@ async function loadVisits() {
         </tbody>
       </table>`;
   }
+
+  // Hand data directly to chart renderer (defined in admin.php inline script)
+  if (typeof window.renderVisitsCharts === 'function') {
+    window.renderVisitsCharts(data.perDay || [], data.perPage || []);
+  }
 }

@@ -14,7 +14,9 @@ require_once __DIR__ . '/includes/db.php';
 // Determine the page name from the calling file
 $page = basename($_SERVER['PHP_SELF'], '.php');
 $page = basename($page, '.html');
-
+$pdo->prepare(
+    'INSERT INTO page_visits (page_name) VALUES (?)'
+)->execute([$page]);
 // Only count once per session per page
 $sessionKey = 'visited_' . $page;
 if (empty($_SESSION[$sessionKey])) {

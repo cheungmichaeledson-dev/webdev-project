@@ -14,6 +14,22 @@ $username = htmlspecialchars($_SESSION['username']);
   <title>IntraSpots | Admin</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/admin.css">
+  <style>
+    /* Visits — two-column chart row */
+    .visits-charts-row {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .visits-chart-card {
+      border-radius: 12px;
+      padding: 20px 22px;
+    }
+    @media (max-width: 900px) {
+      .visits-charts-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -144,26 +160,79 @@ $username = htmlspecialchars($_SESSION['username']);
 
     <!-- VISITS TAB -->
     <section class="admin-tab" id="tab-visits">
+
+      <!-- Stat row -->
       <div class="stat-grid" id="visits-stat-grid">
         <div class="stat-card">
           <div class="stat-value" id="stat-total-visits">—</div>
           <div class="stat-label">Total Visits</div>
         </div>
-      </div>
-
-      <div class="admin-section">
-        <h2 class="admin-section-title">Visits by Page</h2>
-        <div id="visits-by-page" class="admin-table-wrap">
-          <p class="loading-text">Loading...</p>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-visits-today">—</div>
+          <div class="stat-label">Today</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-visits-avg">—</div>
+          <div class="stat-label">Daily Average</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="stat-visits-peak">—</div>
+          <div class="stat-label">Peak Day</div>
         </div>
       </div>
 
-      <div class="admin-section">
-        <h2 class="admin-section-title">Visits per Day <span class="admin-section-sub">(last 14 days)</span></h2>
-        <div id="visits-by-day" class="admin-table-wrap">
-          <p class="loading-text">Loading...</p>
+      <!-- Charts row -->
+      <div class="visits-charts-row">
+
+        <!-- Daily bar chart -->
+        <div class="admin-section visits-chart-card" id="visits-daily-card">
+          <h2 class="admin-section-title">
+            Visits per Day
+            <span class="admin-section-sub">(last 14 days)</span>
+          </h2>
+          <div id="visits-bar-wrap" style="position:relative;width:100%;height:260px;">
+            <canvas id="visits-bar-chart"
+              role="img"
+              aria-label="Bar chart showing daily visits over the last 14 days">
+              Loading visits data…
+            </canvas>
+          </div>
+          <!-- Custom legend -->
+          <div style="display:flex;gap:16px;margin-top:10px;font-size:12px;color:var(--muted);">
+            <span style="display:flex;align-items:center;gap:5px;">
+              <span style="width:10px;height:10px;border-radius:2px;background:#6366f1;display:inline-block;"></span>
+              Visits
+            </span>
+            <span style="display:flex;align-items:center;gap:5px;">
+              <span style="width:24px;height:2px;background:#a5b4fc;display:inline-block;border-top:2px dashed #a5b4fc;"></span>
+              7-day avg
+            </span>
+          </div>
         </div>
+
+        <!-- Doughnut: visits by page -->
+        <div class="admin-section visits-chart-card" id="visits-page-card">
+          <h2 class="admin-section-title">Visits by Page</h2>
+          <div id="visits-donut-wrap" style="position:relative;width:100%;height:220px;display:flex;align-items:center;justify-content:center;">
+            <canvas id="visits-donut-chart"
+              role="img"
+              aria-label="Doughnut chart showing proportion of visits by page">
+              Loading page data…
+            </canvas>
+          </div>
+          <div id="visits-donut-legend" style="margin-top:12px;font-size:12px;display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+
       </div>
+
+      <!-- Raw tables (hidden behind charts; still populated by admin.js for fallback) -->
+      <div class="admin-section" style="display:none;">
+        <div id="visits-by-page" class="admin-table-wrap"><p class="loading-text">Loading...</p></div>
+      </div>
+      <div class="admin-section" style="display:none;">
+        <div id="visits-by-day" class="admin-table-wrap"><p class="loading-text">Loading...</p></div>
+      </div>
+
     </section>
 
   </main>
@@ -274,5 +343,166 @@ $username = htmlspecialchars($_SESSION['username']);
   <div class="admin-toast" id="admin-toast"></div>
 
   <script src="admin.js"></script>
+
+  <!-- Chart.js for Visits visualizations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+  <script>
+  (function () {
+    const BAR_COLOR    = '#6366f1';
+    const BAR_HOVER    = '#4f46e5';
+    const AVG_COLOR    = '#a5b4fc';
+    const DONUT_COLORS = ['#6366f1','#8b5cf6','#06b6d4','#10b981','#f59e0b','#ef4444','#ec4899','#3b82f6'];
+
+    function isDark() {
+      return document.documentElement.classList.contains('dark') ||
+             window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    function textColor() { return isDark() ? '#c2c0b6' : '#4b4b47'; }
+    function gridColor() { return isDark() ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'; }
+
+    function rollingAvg(arr, w) {
+      return arr.map((_, i) => {
+        const s = arr.slice(Math.max(0, i - w + 1), i + 1);
+        return Math.round(s.reduce((a, b) => a + b, 0) / s.length);
+      });
+    }
+
+    function updateExtraStats(perDay) {
+      if (!perDay.length) return;
+      const vals  = perDay.map(r => Number(r.visits));
+      const today = vals[vals.length - 1];
+      const avg   = Math.round(vals.reduce((a, b) => a + b, 0) / vals.length);
+      const peak  = Math.max(...vals);
+      const set   = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v.toLocaleString(); };
+      set('stat-visits-today', today);
+      set('stat-visits-avg',   avg);
+      set('stat-visits-peak',  peak);
+    }
+
+    var _barChart = null;
+    var _donutChart = null;
+
+    function renderBarChart(perDay) {
+      const ctx = document.getElementById('visits-bar-chart');
+      if (!ctx || !perDay.length) return;
+      if (_barChart) { _barChart.destroy(); }
+
+      const rawVals     = perDay.map(r => Number(r.visits));
+      const avg         = rollingAvg(rawVals, 7);
+      const shortLabels = perDay.map(r => {
+        const d = new Date(r.day);
+        return isNaN(d) ? r.day : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      });
+      const tc = textColor(), gc = gridColor();
+
+      _barChart = new Chart(ctx, {
+        data: {
+          labels: shortLabels,
+          datasets: [
+            {
+              type: 'bar', label: 'Visits', data: rawVals,
+              backgroundColor: BAR_COLOR, hoverBackgroundColor: BAR_HOVER,
+              borderRadius: 4, borderSkipped: false, order: 2,
+            },
+            {
+              type: 'line', label: '7-day avg', data: avg,
+              borderColor: AVG_COLOR, borderWidth: 1.5, borderDash: [4, 4],
+              pointRadius: 0, tension: 0.4, fill: false, order: 1,
+            }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: isDark() ? '#2c2c2a' : '#fff',
+              titleColor: tc, bodyColor: tc,
+              borderColor: isDark() ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)',
+              borderWidth: 1, padding: 10,
+              callbacks: { label: c => ' ' + c.dataset.label + ': ' + c.parsed.y.toLocaleString() }
+            }
+          },
+          scales: {
+            x: {
+              ticks: { color: tc, font: { size: 11 }, autoSkip: false, maxRotation: 45 },
+              grid: { display: false },
+            },
+            y: {
+              ticks: { color: tc, font: { size: 11 }, callback: v => v.toLocaleString() },
+              grid: { color: gc },
+              beginAtZero: true,
+            }
+          }
+        }
+      });
+    }
+
+    function renderDonutChart(perPage) {
+      const ctx = document.getElementById('visits-donut-chart');
+      if (!ctx || !perPage.length) return;
+      if (_donutChart) { _donutChart.destroy(); }
+
+      const labels = perPage.map(r => r.page);
+      const values = perPage.map(r => Number(r.visits));
+      const total  = values.reduce((a, b) => a + b, 0);
+      const tc     = textColor();
+
+      _donutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{
+            data: values,
+            backgroundColor: DONUT_COLORS.slice(0, values.length),
+            hoverOffset: 6, borderWidth: 2,
+            borderColor: isDark() ? '#1c1c1a' : '#fff',
+          }]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false, cutout: '62%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: isDark() ? '#2c2c2a' : '#fff',
+              titleColor: tc, bodyColor: tc,
+              borderColor: isDark() ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.1)',
+              borderWidth: 1,
+              callbacks: {
+                label: c => {
+                  const pct = total ? Math.round(c.parsed / total * 100) : 0;
+                  return ' ' + c.parsed.toLocaleString() + ' visits (' + pct + '%)';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      const legend = document.getElementById('visits-donut-legend');
+      if (legend) {
+        legend.innerHTML = labels.map(function(lbl, i) {
+          const pct   = total ? Math.round(values[i] / total * 100) : 0;
+          const color = DONUT_COLORS[i % DONUT_COLORS.length];
+          return '<span style="display:flex;align-items:center;gap:6px;justify-content:space-between;">'
+            + '<span style="display:flex;align-items:center;gap:6px;">'
+            + '<span style="width:10px;height:10px;border-radius:2px;background:' + color + ';flex-shrink:0;"></span>'
+            + '<span style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:160px;">' + lbl + '</span>'
+            + '</span>'
+            + '<span style="font-weight:500;margin-left:8px;">' + pct + '%</span>'
+            + '</span>';
+        }).join('');
+      }
+    }
+
+    /* Exposed globally so loadVisits() in admin.js can call it directly */
+    window.renderVisitsCharts = function(perDay, perPage) {
+      renderBarChart(perDay);
+      renderDonutChart(perPage);
+      updateExtraStats(perDay);
+    };
+  })();
+  </script>
 </body>
 </html>

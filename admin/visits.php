@@ -11,18 +11,18 @@ $total = $pdo->query('SELECT COUNT(*) FROM page_visits')->fetchColumn();
 
 // Visits per page
 $perPage = $pdo->query('
-    SELECT page, COUNT(*) AS visits
+    SELECT page_name AS page, COUNT(*) AS visits
     FROM page_visits
-    GROUP BY page
+    GROUP BY page_name
     ORDER BY visits DESC
 ')->fetchAll(PDO::FETCH_ASSOC);
 
 // Visits per day (last 14 days)
 $perDay = $pdo->query('
-    SELECT DATE(visited_at) AS day, COUNT(*) AS visits
+    SELECT DATE(visit_time) AS day, COUNT(*) AS visits
     FROM page_visits
-    WHERE visited_at >= DATE_SUB(NOW(), INTERVAL 14 DAY)
-    GROUP BY DATE(visited_at)
+    WHERE visit_time >= DATE_SUB(NOW(), INTERVAL 14 DAY)
+    GROUP BY DATE(visit_time)
     ORDER BY day ASC
 ')->fetchAll(PDO::FETCH_ASSOC);
 
