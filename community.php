@@ -161,7 +161,7 @@
     .community-main {
       max-width: 1400px;
       margin: 0 auto;
-      padding: 4rem 2rem;
+      padding: 2rem 1.5rem;
       display: grid;
       grid-template-columns: 1fr 380px;
       gap: 3rem;
@@ -212,13 +212,14 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
+      padding: 0 1 rem;
       padding-bottom: 1rem;
     }
 
     .carousel-track::-webkit-scrollbar { display: none; }
 
     .spot-card {
-      flex: 0 0 300px;
+      flex: 0 0 220px;
       scroll-snap-align: start;
       background: var(--dark-2);
       border: 1px solid var(--border);
