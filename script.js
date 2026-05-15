@@ -1,4 +1,142 @@
-// script.js
+function scrollTeam(direction) {
+      const carousel = document.getElementById('teamCarousel');
+      // Dynamically calculate scroll amount based on card width + gap
+      const cardWidth = carousel.querySelector('.team-card').offsetWidth;
+      const gap = 32; // 2rem gap
+      const scrollAmount = cardWidth + gap;
+      
+      carousel.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    // --- Scroll Animations (Intersection Observer) ---
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      }, observerOptions);
+
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(el => observer.observe(el));
+    });
+
+
+function revealOnScroll() {
+      const reveals = document.querySelectorAll('.reveal');
+      const windowHeight = window.innerHeight;
+      const elementVisible = 100;
+
+      reveals.forEach((reveal) => {
+        const elementTop = reveal.getBoundingClientRect().top;
+        if (elementTop < windowHeight - elementVisible) {
+          reveal.classList.add('active');
+        }
+      });
+    }
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll(); // Trigger once on load
+
+    // --- 2. Carousel Controls ---
+    const carousel = document.getElementById('servicesCarousel');
+    const nextBtn = document.getElementById('nextBtn');
+    const prevBtn = document.getElementById('prevBtn');
+
+    function scrollCarousel(direction) {
+      // Calculate width of one card + gap to snap perfectly
+      const cardWidth = carousel.querySelector('.service-item').offsetWidth;
+      const gap = 32; // 2rem gap from CSS
+      const scrollAmount = cardWidth + gap;
+
+      carousel.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    nextBtn.addEventListener('click', () => scrollCarousel(1));
+    prevBtn.addEventListener('click', () => scrollCarousel(-1));
+
+    // --- 3. Creative Parallax Floating Background Elements ---
+    const shapesContainer = document.getElementById('shapesContainer');
+    const shapes = [];
+
+    // Create random minimalist circles
+    for(let i = 0; i < 8; i++) {
+      const shape = document.createElement('div');
+      shape.classList.add('shape');
+      
+      const size = Math.random() * 150 + 50; // 50px to 200px
+      const posX = Math.random() * 100; // 0 to 100vw
+      const posY = Math.random() * 100; // 0 to 100% of container
+      const speed = Math.random() * 0.4 + 0.1; // Parallax speed multiplier
+      
+      shape.style.width = `${size}px`;
+      shape.style.height = `${size}px`;
+      shape.style.left = `${posX}%`;
+      shape.style.top = `${posY}%`;
+      
+      // Store speed in data attribute for parallax calc
+      shape.dataset.speed = speed;
+      
+      shapesContainer.appendChild(shape);
+      shapes.push(shape);
+    }
+
+    // Parallax logic for shapes based on scroll
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      shapes.forEach(shape => {
+        const speed = parseFloat(shape.dataset.speed);
+        // Move element upward at different speeds relative to scroll
+        const yPos = -(scrollY * speed);
+        shape.style.transform = `translateY(${yPos}px)`;
+      });
+    });
+    function scrollTeam(direction) {
+      const carousel = document.getElementById('teamCarousel');
+      // Dynamically calculate scroll amount based on card width + gap
+      const cardWidth = carousel.querySelector('.team-card').offsetWidth;
+      const gap = 32; // 2rem gap
+      const scrollAmount = cardWidth + gap;
+      
+      carousel.scrollBy({
+        left: direction * scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+      };
+
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      }, observerOptions);
+
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(el => observer.observe(el));
+    });
+
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -202,4 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
       modal.classList.remove("show");
     }
   });
+
+  
 });
