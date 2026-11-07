@@ -23,6 +23,8 @@ $username = htmlspecialchars($_SESSION['username']);
       margin-top: 20px;
     }
     .visits-chart-card {
+      background: var(--card-bg, #fff);
+      border: 1px solid var(--border, rgba(0,0,0,0.08));
       border-radius: 12px;
       padding: 20px 22px;
     }
